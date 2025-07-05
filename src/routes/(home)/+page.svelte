@@ -235,30 +235,31 @@
       <div
         class="text-xl md:text-3xl font-bold bg-clip-text text-transparent bg-linear-to-r from-primary to-accent mb-3 md:mb-7 pb-1"
       >
-        SaaS Starter Demo
+        Teams of Professional AI Agents for Hire
       </div>
 
       <div
         class="text-4xl md:text-6xl font-bold px-2"
         style="line-height: 1.2;"
       >
-        The
+        Experience
         <span
           class="underline decoration-secondary decoration-4 md:decoration-[6px]"
-          >open source</span
+          >the power</span
         >,
         <span
           class="underline decoration-secondary decoration-4 md:decoration-[6px]"
-          >fast</span
+          >the comfort</span
         >, and
         <span
           class="underline decoration-secondary decoration-4 md:decoration-[6px]"
-          >free to host</span
+          >the joy</span
         >
-        <span> SaaS template</span>
+        <span>when a well-coordinated Team of AI Agents is working on your behalf</span>
       </div>
       <div class="mt-6 md:mt-10 text-sm md:text-lg">
-        Built with <a
+        Specify what you want to build and the technologies you want to use:
+        <a
           href="https://kit.svelte.dev"
           class="link font-bold"
           target="_blank">SvelteKit</a
@@ -275,20 +276,18 @@
         <a href="https://daisyui.com" class="link font-bold" target="_blank"
           >DaisyUI</a
         >, and
-        <a
-          href="https://www.postgresql.org"
-          class="link font-bold"
-          target="_blank">Postgres</a
+        <a href="https://www.postgresql.org" class="link font-bold" target="_blank"
+          >Postgres</a
         >
       </div>
       <div
         class="mt-6 md:mt-4 flex flex-row flex-wrap gap-4 place-content-center"
       >
-        <a href="https://github.com/CriticalMoments/CMSaasStarter">
+        <a href="https://github.com/airockstar/rockstar">
           <button class="btn btn-primary px-6">★ us on Github</button>
         </a>
         <a
-          href="https://github.com/CriticalMoments/CMSaasStarter/tree/main#saas-starter"
+          href="https://rockstar.ai/docs"
         >
           <button class="btn btn-outline btn-primary px-6">Read the Docs</button
           >
@@ -370,16 +369,16 @@
         class="flex flex-col lg:flex-row mt-6 gap-6 place-content-center content-center"
       >
         <div class="hidden md:block">
-          <a href="https://criticalmoments.io" target="_blank" class="link">
+          <a href="https://rockstar.ai" target="_blank" class="link">
             <div class="mockup-browser border">
               <div class="mockup-browser-toolbar">
                 <div class="input" style="background:#eee;">
-                  https://criticalmoments.io
+                  https://rockstar.ai
                 </div>
               </div>
               <div class="flex justify-center">
                 <img
-                  alt="Screenshot of criticalmoments.io homepage"
+                  alt="Screenshot of a rockstar.ai production"
                   class="aspect-2044/1242"
                   src="/images/example-home.png"
                 />
@@ -387,38 +386,27 @@
             </div>
           </a>
         </div>
-        <div class="md:hidden">
-          <a href="https://criticalmoments.io" target="_blank" class="link">
-            <div class="card shadow-xl border overflow-hidden">
-              <img
-                alt="Screenshot of criticalmoments.io homepage"
-                class="aspect-2044/1242"
-                src="/images/example-home.png"
-              />
-            </div></a
-          >
-        </div>
         <div class="min-w-[270px] lg:min-w-[420px] flex mt-6 lg:mt-0">
           <div class="my-auto">
             <div class="px-4 text-lg md:text-xl">
-              <a href="https://criticalmoments.io" class="" target="_blank"
-                >SaaS Starter was created by <span
-                  class="font-bold whitespace-nowrap">Critical Moments</span
-                >: a SDK to to help mobile apps
+              <a href="https://rockstar.ai" class="" target="_blank"
+                >Rockstar was created by <span
+                  class="font-bold whitespace-nowrap">Engineers</span
+                > who think no human should have to suffer one more day of Scrum.
                 <span class="underline decoration-secondary decoration-[3px]"
-                  >increase conversion rates and app-ratings.</span
+                  >Build Huge Unicorn Applications in a Single Bound.</span
                 ></a
               >
             </div>
             <div class="px-4 mt-6 text-lg md:text-xl">
               Our <a
-                href="https://criticalmoments.io"
+                href="https://newzz.com"
                 class="link font-bold"
                 target="_blank">webpage</a
-              > is the best example of SaaS Starter with style and real content.
+              > is a small example of a ai-built, ai-powered, ai-maintained application by Rockstar.
             </div>
             <div class="mt-4 text-large">
-              <a href="https://criticalmoments.io" target="_blank">
+              <a href="https://rockstar.ai/production/newzz.com" target="_blank">
                 <button class="btn btn-primary btn-wide mt-3"
                   >See it in Action</button
                 >

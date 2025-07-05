@@ -17,7 +17,7 @@
     <ul class="menu menu-horizontal px-1 hidden sm:flex font-bold text-lg">
       <li class="md:mx-4">
         <a
-          href="https://github.com/CriticalMoments/CMSaasStarter"
+          href="https://github.com/airockstar/rockstar"
           class="border border-primary">★ us on Github</a
         >
       </li>
@@ -68,7 +68,7 @@
         <li><a href="/search">Search</a></li>
         <li>
           <a
-            href="https://github.com/CriticalMoments/CMSaasStarter"
+            href="https://github.com/airockstar/rockstar"
             class="border border-primary">★ us on Github</a
           >
         </li>
@@ -96,18 +96,18 @@
       <a class="link link-hover my-1" href="/contact_us">Contact Us</a>
       <a
         class="link link-hover my-1"
-        href="https://github.com/CriticalMoments/CMSaasStarter">Github</a
+        href="https://github.com/airockstar/rockstar">Github</a
       >
     </nav>
     <aside>
-      <span class="footer-title opacity-80">Sponsor</span>
-      <a class="max-w-[260px]" href="https://getkiln.ai">
-        <div class="font-bold text-3xl mb-1">Kiln AI</div>
-        <div class="font-medium mb-3">Build High Quality AI Products</div>
+      <a class="max-w-[260px]" href="https://rockstar.ai">
+        <div class="font-bold text-3xl mb-1">Rockstar AI</div>
+        <div class="font-medium mb-3">The Future is Starting</div>
         <div class="font-light">
-          Use advanced AI tactics, and collaborate with your team. Free apps for
-          Mac and Windows.
+Use your AI team to build next generation extremely professional, extremely cool digital applications that will "rock" the world
         </div>
+      </a>
+      <a class="max-w-[260px]" href="https://rockstar.ai/onboarding">
         <div class="link text-sm font-bold mt-2">Learn More</div>
       </a>
     </aside>
