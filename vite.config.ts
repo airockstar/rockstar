@@ -1,9 +1,12 @@
 import { sveltekit } from "@sveltejs/kit/vite"
 import { defineConfig } from "vitest/config"
 import { buildAndCacheSearchIndex } from "./src/lib/build_index"
+import devToolsJson from 'vite-plugin-devtools-json';
+
 
 export default defineConfig({
   plugins: [
+    devToolsJson({ }),
     sveltekit(),
     {
       name: "vite-build-search-index",

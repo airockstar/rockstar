@@ -406,7 +406,7 @@
               > is a small example of a ai-built, ai-powered, ai-maintained application by Rockstar.
             </div>
             <div class="mt-4 text-large">
-              <a href="https://rockstar.ai/production/newzz.com" target="_blank">
+              <a href="/production/newzz.com" target="_blank">
                 <button class="btn btn-primary btn-wide mt-3"
                   >See it in Action</button
                 >

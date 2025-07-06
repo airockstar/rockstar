@@ -1,7 +1,8 @@
 <script lang="ts">
   import { applyAction, enhance } from "$app/forms"
   import type { SubmitFunction } from "@sveltejs/kit"
-  import "../../../../app.css"
+  import RSkunkWorks from "./RSkunkWorks.svelte"
+  import "$src/app.css"
 
   interface User {
     email: string
@@ -15,10 +16,12 @@
 
   interface Props {
     data: { user: User; profile: Profile }
-    production: RProduction
+    skunkwork: Object // RProduction
   }
 
-  let { data, production }: Props = $props()
+  let { data, skunkwork }: Props = $props()
+
+  skunkwork = skunkwork || { name: "My Production" }
 
   let { user, profile } = data
 
@@ -43,7 +46,7 @@
 </script>
 
 <svelte:head>
-  <title>Production {production.name}</title>
+  <title>Production {skunkwork.name}</title>
 </svelte:head>
 
 <div
@@ -51,7 +54,7 @@
 >
   <div class="flex flex-col w-64 lg:w-80">
     <div>
-      <h1 class="text-2xl font-bold mb-6">Production {production.name}</h1>
+      <h1 class="text-2xl font-bold mb-6">Production {skunkwork.name}</h1>
 
 			<RSkunkWorks />
       <div class="text-sm text-slate-800 mt-14">

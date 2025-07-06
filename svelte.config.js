@@ -11,6 +11,11 @@ const config = {
     // allow up to 150kb of style to be inlined with the HTML
     // Faster FCP (First Contentful Paint) by reducing the number of requests
     inlineStyleThreshold: 150000,
+    alias: {
+        $skunkworks: 'src/routes/production',
+        $home: 'src/routes/(home)',
+        $src: 'src'
+    }
   },
   preprocess: vitePreprocess(),
 }
