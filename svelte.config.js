@@ -17,6 +17,7 @@ const config = {
         "@src": 'src',
         "@utils": 'src/shared/utils',
         "@components": 'src/shared/components',
+        "@api": 'src/lib/api',
         "@shared": 'src/shared'
     }
   },

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { session } from "$app/stores";
-	import { statusStore } from "$lib/store/status";
+	import { statusStore } from "@components/store/status";
 	import Icon from "@iconify/svelte";
 	import { log } from "@utils/logger";
-	import ProfilePopup from "./popup/user/ProfilePopup.svelte";
+	import ProfilePopup from "./ProfilePopup.svelte";
 	import Search from "./Search.svelte";
 
 	let statusEmoji: string;

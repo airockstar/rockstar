@@ -5,7 +5,7 @@
 	import { privateChannels } from "../../store/channel";
 	import { clickOutside } from "@utils/clickOutside";
 	import { log } from "@utils/logger";
-	import Search from "@components/Search.svelte";
+	import Search from "@components/topbar/Search.svelte";
 
 	export let active = false;
 	let searchValue: string = "";

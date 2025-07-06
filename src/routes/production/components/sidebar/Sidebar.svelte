@@ -1,7 +1,7 @@
 <!-- <svelte:options immutable /> -->
 <script lang="ts">
-	import { createChannel } from "../api/channel-api";
-	import EmojiPicker from "@shared/components/emoji/EmojiPicker.svelte";
+	import { createChannel } from "@api/channel-api";
+	import EmojiPicker from "@components/topbar/EmojiPicker.svelte";
 	import TextInput from "@shared/components/input/TextInput.svelte";
 	import Loader from "@shared/components/loaders/Loader.svelte";
 	import Model from "@shared/components/modals/Model.svelte";

@@ -3,7 +3,7 @@
 	import FieldWrapper from "$lib/global/FieldGroup.svelte";
 	import InputModel from "$lib/global/models/InputModel.svelte";
 	import type { Channel } from "$lib/types";
-	import { updateChannel } from "$lib/api/channel-api";
+	import { updateChannel } from "@api/channel-api";
 	import { log } from "@utils/logger";
 	import { parseDate } from "@utils/dateUtils";
 

@@ -1,7 +1,7 @@
 import { writable } from "svelte/store";
 import type { Writable } from "svelte/store";
 import type { User } from "$lib/types";
-import { fetchUsersList } from "../components/api/user-api";
+import { fetchUsersList } from "@api/user-api";
 
 type Status = "loading" | "available" | "error";
 interface AsyncStore<T> {

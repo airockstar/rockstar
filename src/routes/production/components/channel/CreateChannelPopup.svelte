@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createChannel } from "../api/channel-api";
+	import { createChannel } from "@api/channel-api";
 
 	import TextInput from "@components/input/TextInput.svelte";
 	import Model from "@components/modals/Model.svelte";

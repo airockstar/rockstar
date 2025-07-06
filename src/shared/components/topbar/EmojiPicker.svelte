@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { emoji } from "./emoji_v2";
+	import { emoji } from "@components/emoji/emoji_v2";
 	import { clickOutside } from "@shared/utils/clickOutside.ts";
 	import { createEventDispatcher } from "svelte";
 	import EmojiTopbar from "./EmojiTopbar.svelte";

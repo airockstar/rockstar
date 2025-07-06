@@ -5,7 +5,7 @@
 	import type { User } from "$lib/types";
 	import { onlineUsers } from "../store/users";
 	import { log } from "@utils/logger";
-	import Topbar from "@components/Topbar.svelte";
+	import Topbar from "@components/topbar/Topbar.svelte";
 
 	socket.on("user:active", (users: User[]) => {
 		$onlineUsers = users;

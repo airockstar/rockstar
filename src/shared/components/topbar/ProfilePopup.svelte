@@ -1,22 +1,22 @@
 <script lang="ts">
 	import { session } from "$app/stores";
-	import { clearUserStatus, uploadUserStatus } from "$lib/api/user-api";
-	import { emoji } from "$lib/emoji_v2";
-	import Button from "$lib/global/buttons/Button.svelte";
+	import { clearUserStatus, uploadUserStatus } from "@api/user-api";
+	import { emoji } from "@components/emoji/emoji_v2";
+	import Button from "@components/buttons/Button.svelte";
 
-	import Select from "$lib/global/input/Select.svelte";
-	import TextInput from "$lib/global/input/TextInput.svelte";
-	import Model from "$lib/global/models/Model.svelte";
-	import ModelActions from "$lib/global/models/ModelActions.svelte";
-	import UpdateStatus from "$lib/global/UpdateStatus.svelte";
-	import { overlay } from "$lib/store/interface";
-	import { statusStore } from "$lib/store/status";
+	import Select from "@components/input/Select.svelte";
+	import TextInput from "@components/input/TextInput.svelte";
+	import Model from "@components/modals/Model.svelte";
+	import ModelActions from "@components/modals/ModelActions.svelte";
+	import UpdateStatus from "./UpdateStatus.svelte";
+	import { overlay } from "@components/store/interface";
+	import { statusStore } from "@components/store/status";
 	import Icon from "@iconify/svelte";
 	import { log } from "@utils/logger";
-	import MenuBlurb from "../MenuBlurb.svelte";
-	import MenuItem from "../MenuItem.svelte";
-	import NewMenu from "../NewMenu.svelte";
-	import SubMenu from "../SubMenu.svelte";
+	import MenuBlurb from "@components/menu/MenuBlurb.svelte";
+	import MenuItem from "@components/menu/MenuItem.svelte";
+	import NewMenu from "@components/menu/NewMenu.svelte";
+	import SubMenu from "@components/menu/SubMenu.svelte";
 
 	export let statusModelOpen: boolean = false;
 	export let profilePopupOpen: boolean = false;

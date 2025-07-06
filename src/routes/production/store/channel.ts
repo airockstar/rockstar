@@ -1,5 +1,5 @@
 import { session } from "$app/stores";
-import { fetchChannelData } from "../components/api/channel-api";
+import { fetchChannelData } from "@api/channel-api";
 import { derived, get, writable } from "svelte/store";
 import type { Readable } from "svelte/store";
 import type { PrivateChannel, Channel } from "../types";

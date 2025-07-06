@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Icon from "@iconify/svelte";
-	import EmojiPicker from "../emoji/EmojiPicker.svelte";
+	import EmojiPicker from "@components/topbar/EmojiPicker.svelte";
 
 	interface IconProps {
 		width?: number;
