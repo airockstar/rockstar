@@ -2,7 +2,7 @@
   import { applyAction, enhance } from "$app/forms"
   import type { SubmitFunction } from "@sveltejs/kit"
   import RSkunkWorks from "./RSkunkWorks.svelte"
-  import "$src/app.css"
+  import "@src/app.css"
 
   interface User {
     email: string

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { ChannelType } from "$lib/types";
 	import Icon from "@iconify/svelte";
-	import { onlineUsers } from "$lib/store/users";
+	import { onlineUsers } from "../../store/users";
 	import NotifcationBadge from "./NotifcationBadge.svelte";
-	import Menu from "$lib/global/popup/Menu.svelte";
+	import Menu from "@components/popup/Menu.svelte";
 
 	export let username: string;
 	export let channelId: number = 0;

@@ -3,7 +3,7 @@
 
 <section>
 	<img src="/images/logo.png" alt="Logo" />
-	<h5>Saber</h5>
+	<h5>Rockstar</h5>
 </section>
 
 <style lang="scss">

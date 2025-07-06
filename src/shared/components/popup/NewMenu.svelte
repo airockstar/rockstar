@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { overlay } from "$lib/store/interface";
-
-	import { clickOutside } from "$lib/utils/clickOutside";
+	import { overlay } from "@utils/interface";
+	import { clickOutside } from "@utils/clickOutside";
 	import { createEventDispatcher, onMount } from "svelte";
 
 	// export let active: boolean = false;

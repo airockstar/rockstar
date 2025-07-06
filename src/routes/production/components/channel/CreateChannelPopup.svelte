@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { createChannel } from "$lib/api/channel-api";
+	import { createChannel } from "../api/channel-api";
 
-	import TextInput from "$lib/global/input/TextInput.svelte";
-	import Model from "$lib/global/models/Model.svelte";
-	import ModelActions from "$lib/global/models/ModelActions.svelte";
-	import { publicChannels } from "$lib/store/channel";
-	import { overlay } from "$lib/store/interface";
+	import TextInput from "@components/input/TextInput.svelte";
+	import Model from "@components/modals/Model.svelte";
+	import ModelActions from "@components/modals/ModelActions.svelte";
+	import { publicChannels } from "../../store/channel";
+	import { overlay } from "@utils/interface";
 	import { log } from "@utils/logger";
 	import { createEventDispatcher } from "svelte";
 

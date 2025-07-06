@@ -1,24 +1,24 @@
 <!-- <svelte:options immutable /> -->
 <script lang="ts">
-	import { createChannel } from "$lib/api/channel-api";
-	import EmojiPicker from "$lib/global/emoji/EmojiPicker.svelte";
-	import TextInput from "$lib/global/input/TextInput.svelte";
-	import Loader from "$lib/global/loaders/Loader.svelte";
-	import Model from "$lib/global/models/Model.svelte";
-	import ModelActions from "$lib/global/models/ModelActions.svelte";
-	import { privateChannels, publicChannel, publicChannels } from "$lib/store/channel";
-	import { overlay } from "$lib/store/interface";
-	import { allUsers } from "$lib/store/users";
+	import { createChannel } from "../api/channel-api";
+	import EmojiPicker from "@shared/components/emoji/EmojiPicker.svelte";
+	import TextInput from "@shared/components/input/TextInput.svelte";
+	import Loader from "@shared/components/loaders/Loader.svelte";
+	import Model from "@shared/components/modals/Model.svelte";
+	import ModelActions from "@shared/components/modals/ModelActions.svelte";
+	import { privateChannels, publicChannel, publicChannels } from "../../store/channel";
+	import { overlay } from "@shared/utils/interface";
+	import { allUsers } from "../../store/users";
 	import { log } from "@utils/logger";
 	import ChannelGroup from "./ChannelGroup.svelte";
 	import GroupChannel from "./GroupChannel.svelte";
-	import DirectMessagePopup from "../global/popup/user/DirectMessagePopup.svelte";
+	import DirectMessagePopup from "../user/DirectMessagePopup.svelte";
 	import SidebarGroup from "./SidebarGroup.svelte";
 	import SidebarHeader from "./SidebarHeader.svelte";
 	import SidebarLink from "./SidebarLink.svelte";
 	import UserChannel from "./UserChannel.svelte";
 	import { groupChannelsByKey } from "@utils/array-utils";
-	import CreateChannelPopup from "$lib/global/popup/channel/CreateChannelPopup.svelte";
+	import CreateChannelPopup from "../channel/CreateChannelPopup.svelte";
 
 	let directMessagePopup = false;
 	let createChannelPopup = false;
@@ -27,8 +27,8 @@
 <section>
 	<SidebarHeader
 		on:createChannel={() => (createChannelPopup = true)}
-		workspace="Web Revived"
-		url="webrevived.saber.com" />
+		workspace="Rockstaring"
+		url="rockstar.ai" />
 
 	<div class="body">
 		<div class="link-group">

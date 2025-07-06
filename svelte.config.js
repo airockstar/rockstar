@@ -12,9 +12,12 @@ const config = {
     // Faster FCP (First Contentful Paint) by reducing the number of requests
     inlineStyleThreshold: 150000,
     alias: {
-        $skunkworks: 'src/routes/production',
-        $home: 'src/routes/(home)',
-        $src: 'src'
+        "@skunkworks": 'src/routes/production',
+        "@home": 'src/routes/(home)',
+        "@src": 'src',
+        "@utils": 'src/shared/utils',
+        "@components": 'src/shared/components',
+        "@shared": 'src/shared'
     }
   },
   preprocess: vitePreprocess(),

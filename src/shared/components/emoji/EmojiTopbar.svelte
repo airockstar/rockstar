@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Search from "../Search.svelte";
-	import { emoji } from "$lib/emoji_v2";
+	import { emoji } from "./emoji_v2";
 	import Icon from "@iconify/svelte";
 
 	let selectedCategory: any;

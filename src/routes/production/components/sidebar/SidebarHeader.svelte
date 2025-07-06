@@ -1,8 +1,8 @@
 <script lang="ts">
-	import MenuBlurb from "$lib/global/popup/MenuBlurb.svelte";
-	import MenuItem from "$lib/global/popup/MenuItem.svelte";
-	import NewMenu from "$lib/global/popup/NewMenu.svelte";
-	import SubMenu from "$lib/global/popup/SubMenu.svelte";
+	import MenuBlurb from "@components/popup/MenuBlurb.svelte";
+	import MenuItem from "@components/popup/MenuItem.svelte";
+	import NewMenu from "@components/popup/NewMenu.svelte";
+	import SubMenu from "@components/popup/SubMenu.svelte";
 	import Icon from "@iconify/svelte";
 	import { createEventDispatcher } from "svelte";
 

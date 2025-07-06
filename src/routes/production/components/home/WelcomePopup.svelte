@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
 	import { session } from "$app/stores";
-	import Button from "$lib/global/buttons/Button.svelte";
-	import TextInput from "$lib/global/input/TextInput.svelte";
+	import Button from "@shared/components/buttons/Button.svelte";
+	import TextInput from "@shared/components/input/TextInput.svelte";
 
 	let value: string;
 	let status = {

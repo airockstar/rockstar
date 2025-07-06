@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { clickOutside } from "$lib/utils/clickOutside";
-	import MenuItem from "$lib/global/popup/MenuItem.svelte";
+	import { clickOutside } from "@utils/clickOutside";
+	import MenuItem from "./MenuItem.svelte";
 
 	export let active: boolean = false;
 	export let xLocation: number;

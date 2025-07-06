@@ -18,10 +18,18 @@ export default defineConfig({
           await buildAndCacheSearchIndex()
         },
       },
-    }
+    },
   ],
   test: {
     include: ["src/**/*.{test,spec}.{js,ts}"],
     globals: true, /// allows to skip import of test functions like `describe`, `it`, `expect`, etc.
-  }
+  },
+  resolve: {
+    alias: {
+      "@src": path.resolve(__dirname, "./src"),
+      "@skunkworks": path.resolve(__dirname, "src/routes/production"),
+      "@home": path.resolve(__dirname, "src/routes/(home)"),
+      "@utils": path.resolve(__dirname, "src/utils")
+    },
+  },
 })

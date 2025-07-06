@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
 	import { session } from "$app/stores";
-	import Spinner from "$lib/global/loaders/Spinner.svelte";
-	import { privateChannels } from "$lib/store/channel";
-	import { clickOutside } from "$lib/utils/clickOutside";
+	import Spinner from "@shared/components/loaders/Spinner.svelte";
+	import { privateChannels } from "../../store/channel";
+	import { clickOutside } from "@utils/clickOutside";
 	import { log } from "@utils/logger";
-	import Search from "$lib/global/Search.svelte";
+	import Search from "@components/Search.svelte";
 
 	export let active = false;
 	let searchValue: string = "";
