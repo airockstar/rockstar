@@ -23,7 +23,7 @@
 
   skunkwork = skunkwork || { name: "My Production" }
 
-  let { user, profile } = data
+  let { user, profile, channel } = data
 
   let loading = $state(false)
   let fullName: string = profile?.full_name ?? ""
@@ -55,7 +55,7 @@
   <div class="flex flex-col w-64 lg:w-80">
     <div>
       <h1 class="text-2xl font-bold mb-6">Production {skunkwork.name}</h1>
-      <RSkunkWorks />
+      <RSkunkWorks channels={data.channels} user={data.user} visiteds={data.visiteds} />
       <div class="text-sm text-slate-800 mt-14">
         You are logged in as {user?.email}.
         <br />

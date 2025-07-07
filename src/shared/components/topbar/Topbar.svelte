@@ -4,6 +4,8 @@
 	import { log } from "@utils/logger";
 	import ProfilePopup from "./ProfilePopup.svelte";
 	import Search from "./Search.svelte";
+	import avatar from '$lib/images/mock_avatar.jpg';
+
 
 	let statusEmoji: string;
 
@@ -20,7 +22,7 @@
 		{#if globalThis.$statusStore}
 			<span class="emoji"> {globalThis.$statusStore?.emoji} </span>
 		{/if}
-		<img alt="Profile Avatar" src="/images/mock-avatar.jpg" />
+		<img alt="Profile Avatar" src="{avatar}" />
 		<div class:online={true} class="status-icon" />
 		<ProfilePopup bind:profilePopupOpen />
 	</div>

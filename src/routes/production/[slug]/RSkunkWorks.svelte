@@ -1,11 +1,16 @@
 <script lang="ts">
 	import Sidebar from "../components/sidebar/Sidebar.svelte";
+	import RSidebar from "./RSidebar.svelte";
+	import RChat from "./RChat.svelte";
 	import { socket } from "@utils/socket";
 	import { onDestroy, onMount } from "svelte";
 	import type { User } from "$lib/types";
 	import { onlineUsers } from "../store/users";
 	import { log } from "@utils/logger";
 	import Topbar from "@components/topbar/Topbar.svelte";
+	export let channels;
+	export let visiteds;
+	export let user;
 
 	socket.on("user:active", (users: User[]) => {
 		$onlineUsers = users;
@@ -38,19 +43,18 @@
 	});
 </script>
 
-<section class="wrapper">
-    <div class="SkunkWork">
-	<Topbar />
-	<Sidebar />
-
-	<slot />
+<div class="wrapper">
+    <Topbar />
+    <div class="wrapper">
+	<RSidebar user={user} channels={channels} visiteds={visiteds} />
+	<RChat />
     </div>
-</section>
+</div>
 
 <style lang="scss">
 	.wrapper {
 		height: 100%;
-		background-color: var(--color-black-s1);
+		background-color: var(--color-white-s1);
 		display: grid;
 		grid-template-columns: auto 1fr;
 		grid-template-rows: auto 1fr;
