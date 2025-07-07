@@ -49,9 +49,7 @@
   <title>Production {skunkwork.name}</title>
 </svelte:head>
 
-<div
-  class="text-center content-center max-w-lg mx-auto min-h-[100vh] pb-12 flex items-center place-content-center"
->
+<div class="Production">
   <div class="flex flex-col w-64 lg:w-80">
     <div>
       <h1 class="text-2xl font-bold mb-6">Production {skunkwork.name}</h1>
@@ -64,3 +62,10 @@
     </div>
   </div>
 </div>
+
+<style lang="scss">
+	.Production {
+		width: 100%;
+		height: 100%;
+	}
+</style>

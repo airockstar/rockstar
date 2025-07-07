@@ -9,7 +9,7 @@ import {
 } from "@supabase/ssr"
 import { redirect } from "@sveltejs/kit"
 import type { Database } from "../../../DatabaseDefinitions.js"
-import { CreateProfileStep } from "../../../config"
+//import { CreateProfileStep } from "../../../config"
 import { load_helper } from "$lib/load_helpers"
 
 export const load = async ({ fetch, data, depends, url }) => {
@@ -51,8 +51,7 @@ export const load = async ({ fetch, data, depends, url }) => {
     profile &&
     !_hasFullProfile(profile) &&
     url.pathname !== createProfilePath &&
-    url.pathname !== signOutPath &&
-    CreateProfileStep
+    url.pathname !== signOutPath // && CreateProfileStep
   ) {
     redirect(303, createProfilePath)
   }

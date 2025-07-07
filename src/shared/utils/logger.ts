@@ -163,6 +163,14 @@ class logger {
 	error(...message: unknown[]) {
 		return this.log("error", message);
 	}
+
+	enter(...message: unknown[]) {
+		return this.log("error", ["ENTER", ...message]);
+	}
+
+	exit(...message: unknown[]) {
+		return this.log("error", ["EXIT", ...message]);
+	}
 }
 
 const log = new logger("debug");

@@ -29,7 +29,9 @@ function RMockClient() {
 	this.select = (fields) => {
 		let res = [];
 		if (fields && fields != "*") {
-			fields = fields.replaceAll(" ", "").split(",");
+			if (typeof fields == "string") {
+				fields = fields.replaceAll(" ", "").split(",");
+			}
 			for (let i = 0; i < this.data.length; ++i) {
 				let d = {};
 				for (let j = 0; j < fields.length; ++j) {

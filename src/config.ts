@@ -1,5 +1,4 @@
-export const WebsiteName: string = "SaaS Starter"
-export const WebsiteBaseUrl: string = "https://saasstarter.work"
+export const WebsiteName: string = "Rockstar.ai"
+export const WebsiteBaseUrl: string = "https://rockstar.ai"
 export const WebsiteDescription: string =
-  "Open source, fast, and free to host SaaS template. Built with SvelteKit, Supabase, Stripe, Tailwind, DaisyUI, and Postgres"
-export const CreateProfileStep: boolean = true
+  "Teams of Professional AI Agents for Hire"
