@@ -1,4 +1,4 @@
-import { session } from "$app/stores";
+import { page } from "$app/state"
 import { fetchChannelData } from "@api/channel-api";
 import { derived, get, writable } from "svelte/store";
 import type { Readable } from "svelte/store";
@@ -13,17 +13,21 @@ interface AsyncStore<T> {
 const initalAsyncState: AsyncStore<[]> = { state: "loading", data: [] };
 
 export const privateChannels = writable<AsyncStore<PrivateChannel[]>>(initalAsyncState, (set) => {
-	fetchChannelData("user", get(session).user.id).then((value: PrivateChannel[]) => {
+/*
+	fetchChannelData("user", $page.data.session.user.id).then((value: PrivateChannel[]) => {
 		set({ state: "available", data: value });
 	});
+*/
 });
 
 export const publicChannels = writable<AsyncStore<Channel[]>>(initalAsyncState, (set) => {
-	fetchChannelData("group", get(session).user.id).then((value: Channel[]) => {
+/*
+	fetchChannelData("group", $page.data.session.user.id).then((value: Channel[]) => {
 		set({ state: "available", data: value });
 	});
+*/
 });
 
 export const publicChannel: Readable<Channel[]> = derived(publicChannels, ($channel) => {
-	return [].concat(...$channel.data.map((channel) => channel));
+//	return [].concat(...$channel.data.map((channel) => channel));
 });

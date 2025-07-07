@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { session } from "$app/stores";
+	import { page } from "$app/state"
 	import { clearUserStatus, uploadUserStatus } from "@api/user-api";
 	import { emoji } from "@components/emoji/emoji_v2";
 	import Button from "@components/buttons/Button.svelte";
@@ -10,7 +10,7 @@
 	import ModelActions from "@components/modals/ModelActions.svelte";
 	import UpdateStatus from "./UpdateStatus.svelte";
 	import { overlay } from "@components/store/interface";
-	import { statusStore } from "@components/store/status";
+	import { statusStore } from "@store/userStore";
 	import Icon from "@iconify/svelte";
 	import { log } from "@utils/logger";
 	import MenuBlurb from "@components/menu/MenuBlurb.svelte";
@@ -38,7 +38,7 @@
 	const saveStatus = async () => {
 		$statusStore = { ...$statusStore, emoji: statusEmoji, status: statusValue };
 		closeStatusModal();
-		const updatedStatus = await uploadUserStatus($session.user.id, statusEmoji, statusValue);
+		const updatedStatus = await uploadUserStatus($page.data.session.user.id, statusEmoji, statusValue);
 
 		console.log(updatedStatus);
 	};
@@ -52,7 +52,7 @@
 	const clearStatus = async () => {
 		$statusStore = null;
 		closeStatusModal();
-		await clearUserStatus($session.user.id);
+		await clearUserStatus($page.data.session.user.id);
 		log.info("Cleared user status");
 	};
 
@@ -121,7 +121,7 @@
 	<NewMenu width="330px" top="105%" right="-3px" on:closeModal={() => (profilePopupOpen = false)}>
 		<MenuItem hover={false}>
 			<div class="update-status">
-				<MenuBlurb name={$session.user.username} desc={"Active"} imgSrc="/images/mock-avatar.jpg" />
+				<MenuBlurb name={$page.data.session.user.username} desc={"Active"} imgSrc="/images/mock-avatar.jpg" />
 				<UpdateStatus on:click={() => (statusModelOpen = true)} status="Active" />
 			</div>
 		</MenuItem>

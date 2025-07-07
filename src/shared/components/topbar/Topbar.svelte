@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { session } from "$app/stores";
-	import { statusStore } from "@components/store/status";
+	import { userStore, statusStore } from "@store/userStore";
 	import Icon from "@iconify/svelte";
 	import { log } from "@utils/logger";
 	import ProfilePopup from "./ProfilePopup.svelte";
@@ -18,8 +17,8 @@
 	</div>
 	<Icon icon="fa-regular:question-circle" width={23} height={23} color="#AFB0B1" />
 	<div class="avatar" on:click={() => (profilePopupOpen = true)}>
-		{#if $statusStore}
-			<span class="emoji"> {$statusStore?.emoji} </span>
+		{#if globalThis.$statusStore}
+			<span class="emoji"> {globalThis.$statusStore?.emoji} </span>
 		{/if}
 		<img alt="Profile Avatar" src="/images/mock-avatar.jpg" />
 		<div class:online={true} class="status-icon" />

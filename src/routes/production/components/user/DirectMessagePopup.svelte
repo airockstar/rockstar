@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
-	import { session } from "$app/stores";
+	import { page } from "$app/state"
 	import Spinner from "@shared/components/loaders/Spinner.svelte";
 	import { privateChannels } from "../../store/channel";
 	import { clickOutside } from "@utils/clickOutside";
@@ -33,7 +33,7 @@
 				},
 				body: JSON.stringify({
 					type: "private",
-					senderId: $session.user.id,
+					senderId: $page.data.session.user.id,
 					receiverId: id
 				}),
 				credentials: "include"

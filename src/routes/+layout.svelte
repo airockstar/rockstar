@@ -1,5 +1,7 @@
 <script lang="ts">
   import "../app.css"
+  import { invalidate } from '$app/navigation'
+  import { onMount } from 'svelte'
   import { navigating } from "$app/stores"
   import { expoOut } from "svelte/easing"
   import { slide } from "svelte/transition"
@@ -7,7 +9,32 @@
     children?: import("svelte").Snippet
   }
 
-  let { children }: Props = $props()
+  let { data, children } = $props()
+  let { session, supabase } = $derived(data)
+
+  onMount(() => {
+    const { data } = supabase.auth.onAuthStateChange((event, newSession) => {
+      if (newSession?.expires_at !== session?.expires_at) {
+        invalidate('supabase:auth')
+      }
+
+      if (event === 'INITIAL_SESSION') {
+        // handle initial session
+      } else if (event === 'SIGNED_IN') {
+        // handle sign in event
+      } else if (event === 'SIGNED_OUT') {
+        // handle sign out event
+      } else if (event === 'PASSWORD_RECOVERY') {
+        // handle password recovery event
+      } else if (event === 'TOKEN_REFRESHED') {
+        // handle token refreshed event
+      } else if (event === 'USER_UPDATED') {
+        // handle user updated event
+      }
+    })
+
+    return () => data.subscription.unsubscribe()
+  })
 </script>
 
 {#if $navigating}

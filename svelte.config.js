@@ -18,7 +18,8 @@ const config = {
         "@utils": 'src/shared/utils',
         "@components": 'src/shared/components',
         "@api": 'src/lib/api',
-        "@shared": 'src/shared'
+        "@shared": 'src/shared',
+	"@store": 'src/lib/store'
     }
   },
   preprocess: vitePreprocess(),

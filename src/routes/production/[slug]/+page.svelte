@@ -55,8 +55,7 @@
   <div class="flex flex-col w-64 lg:w-80">
     <div>
       <h1 class="text-2xl font-bold mb-6">Production {skunkwork.name}</h1>
-
-			<RSkunkWorks />
+      <RSkunkWorks />
       <div class="text-sm text-slate-800 mt-14">
         You are logged in as {user?.email}.
         <br />

@@ -1,6 +1,7 @@
 import type { User } from "$lib/types";
 
 export const fetchUsersList = async (): Promise<User[]> => {
+/*
 	const url = `http://localhost:5000/user`;
 
 	const response = await fetch(url, {
@@ -11,6 +12,8 @@ export const fetchUsersList = async (): Promise<User[]> => {
 	if (!response.ok) throw new Error("Error retriving friends...");
 	const result = await response.json();
 
+*/
+let result = {};
 	return result;
 };
 
