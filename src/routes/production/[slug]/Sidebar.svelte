@@ -2,12 +2,11 @@
   import { writable, type Writable } from 'svelte/store';
   import PlaygroundLabel from './PlaygroundLabel.svelte';
 
-  export let channels: string[];
-  export let agents: string[];
-  export let artifacts: string[];
+  export let channels: object[];
+  export let agents: object[];
+  export let artifacts: object[];
   export let activeSelection: Writable<{
-    type: 'channel' | 'agent' | 'artifact';
-    item: string;
+    type: 'string';
   }>;
 
   let channelsExpanded = true;
@@ -47,12 +46,12 @@
       <div class="space-y-1">
         {#each channels as channel}
           <PlaygroundLabel
-            name={channel}
-            role=""
-            status=""
-            snippet=""
-            isActive={currentSelection.type === 'channel' && currentSelection.item === channel}
-            onClick={() => selectItem('channel', channel)}
+            name={channel.name}
+            role={channel.role}
+            status={channel.status}
+            snippet={channel.snippet}
+            isActive={currentSelection === channel.guid}
+            onClick={() => selectItem('channel', channel.guid)}
           />
         {/each}
       </div>
@@ -73,12 +72,12 @@
       <div class="space-y-1">
         {#each agents as agent}
           <PlaygroundLabel
-            name={agent}
-            role="Agent"
-            status="Online"
-            snippet="Ready to assist"
-            isActive={currentSelection.type === 'agent' && currentSelection.item === agent}
-            onClick={() => selectItem('agent', agent)}
+            name={agent.name}
+            role={agent.role}
+            status={agent.status}
+            snippet={agent.snippet}
+            isActive={currentSelection === agent.guid}
+            onClick={() => selectItem('agent', agent.guid)}
           />
         {/each}
       </div>
@@ -99,11 +98,11 @@
       <div class="space-y-1">
         {#each artifacts as artifact}
           <PlaygroundLabel
-            name={artifact}
-            role="Resource"
-            status="Available"
-            snippet="Click to view"
-            isActive={currentSelection.type === 'artifact' && currentSelection.item === artifact}
+            name={artifact.name}
+            role={artifact.role}
+            status={artifact.status}
+            snippet={artifact.snippet}
+            isActive={currentSelection === artifact.guid}
             onClick={() => selectItem('artifact', artifact)}
           />
         {/each}

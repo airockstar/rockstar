@@ -5,11 +5,11 @@
   import ChatPanel from './ChatPanel.svelte';
   import Sidebar from './Sidebar.svelte';
   import { getLogger } from "@utils/logger";
-//  export let channels;
- // export let visiteds;
- // export let user;
- // export let profile;
- // export let skunkwork;
+  export let channels;
+  export let visiteds;
+  export let user;
+  export let profile;
+  export let skunkwork;
   const log = getLogger(import.meta.url);
 
 
@@ -37,9 +37,9 @@
 
 
 
-  let { data }: Props = $props()
-  let { user, profile, channels, visiteds, skunkwork } = data || {}
-  log.info("load", "channels=" + channels);
+//  let { data }: Props = $props()
+//  let { user, profile, channels, visiteds, skunkwork } = data || {}
+  log.info("load", "channels=" + JSON.stringify(channels));
 </script>
 
 <div class="flex h-screen bg-gray-50">

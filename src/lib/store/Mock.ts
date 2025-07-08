@@ -8,14 +8,19 @@ export function createMockDatabaseClient() {
 
 const db = {
 	channel: [
-		{ name: "General", updated_on: Date.now() },
-		{ name: "Development", updated_on: Date.now() },
-		{ name: "Status", updated_on: Date.now() },
+		{ role: "General", updated_on: Date.now(), snippet: "" },
+		{ role: "Development", updated_on: Date.now(), snippet: "" },
+		{ role: "Status", updated_on: Date.now(), snippet: "" },
 	], 
 	agent: [
-		{ name: "Bob", role: "Developer", updated_on: Date.now()},
-		{ name: "Sue", role: "QA", updated_on: Date.now()},
+		{ name: "Bob", role: "Developer", updated_on: Date.now(), snippet: ""},
+		{ name: "Sue", role: "QA", updated_on: Date.now(), snippet: ""},
 	],
+	artifact: [
+		{ role: "Database", updated_on: Date.now(), snippet: "" },
+		{ role: "Codebase", updated_on: Date.now(), snippet: "" },
+		{ role: "UI", updated_on: Date.now(), snippet: "" },
+	], 
 	user: [
 		{ email: "mock@mock.com" }
 	],

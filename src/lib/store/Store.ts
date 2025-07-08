@@ -20,6 +20,37 @@ export async function getChannels(user) {
 		return channels;
 };
 
+export async function getUserBundle(user, what) {
+	log.enter("getUserBundle");
+	let res = {};
+	const promises = [];
+	const tables = Object.keys(what);
+	for (let i = 0; i < tables.length; ++i) {
+		const tableName = tables[i];
+		const query = what[tableName];
+		new Promise((resolve, reject) => {
+ 			let { data, error } = supabase.from(tables[i]).eq(query);
+			if (error) {
+            			reject(error);
+        		} else {
+            			resolve(data);
+			}
+		});
+        }
+   	Promise.all(promises)
+        	.then(values => {
+			for (let i = 0; i < values.length; ++i) {
+				res[ tables[i]] = values[i];
+			}
+        	})
+        	.catch(error => {
+            		console.error('One of the promises rejected:', error);
+        	});
+	log.exit("getUserBundle", "res: " + JSON.stringify(res));
+	return res;
+};
+
+
 export function getVistedChannelTimestamps(user) {
 	let visits = {};
 	(async () => {

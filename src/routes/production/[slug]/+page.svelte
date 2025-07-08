@@ -13,7 +13,7 @@ import { setContext } from 'svelte';
   }
 
   interface Props {
-    data: { user: User; profile: Profile, channels: Array, skunkwork: Object }
+    data: { user: User; profile: Profile, channels: array, artifacts: Array, agents: array, skunkwork: object }
   }
 
   let { data }: Props = $props()
