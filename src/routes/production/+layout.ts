@@ -2,9 +2,11 @@ import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL, } from "$env/static/publ
 import { createBrowserClient, createServerClient, isBrowser, } from "@supabase/ssr"
 import { redirect } from "@sveltejs/kit"
 import { load_helper } from "$lib/load_helpers"
+import { getLogger } from "@utils/logger"
+const log = getLogger(import.meta.url);
 
 export const load = async ({ fetch, data, depends, url }) => {
-	console.log("ENTER load in production.layout.ts");
+	log.enter("load", "isBrowser=" + isBrowser());
   depends("supabase:auth")
 
   const supabase = isBrowser()
@@ -36,6 +38,9 @@ export const load = async ({ fetch, data, depends, url }) => {
     .single()
 
   const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
+
+	log.exit("load", "user=" + user + ", session=" + session + ",profile=" + (profile ? profile.name : "null"));
+
 
   return {
     supabase,

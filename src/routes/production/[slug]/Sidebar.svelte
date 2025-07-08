@@ -1,0 +1,113 @@
+<script lang="ts">
+  import { writable, type Writable } from 'svelte/store';
+  import PlaygroundLabel from './PlaygroundLabel.svelte';
+
+  export let channels: string[];
+  export let agents: string[];
+  export let artifacts: string[];
+  export let activeSelection: Writable<{
+    type: 'channel' | 'agent' | 'artifact';
+    item: string;
+  }>;
+
+  let channelsExpanded = true;
+  let agentsExpanded = true;
+  let artifactsExpanded = true;
+
+  $: currentSelection = $activeSelection;
+
+  function selectItem(type: 'channel' | 'agent' | 'artifact', item: string) {
+    activeSelection.set({ type, item });
+  }
+
+  function toggleSection(section: 'channels' | 'agents' | 'artifacts') {
+    if (section === 'channels') channelsExpanded = !channelsExpanded;
+    else if (section === 'agents') agentsExpanded = !agentsExpanded;
+    else if (section === 'artifacts') artifactsExpanded = !artifactsExpanded;
+  }
+</script>
+
+<div class="flex flex-col h-full overflow-y-auto">
+  <!-- Header -->
+  <div class="p-4 border-b border-gray-700">
+    <h1 class="text-xl font-bold text-white">Workspace</h1>
+  </div>
+
+  <!-- Channels Section -->
+  <div class="p-4">
+    <button
+      class="flex items-center justify-between w-full text-left text-gray-300 hover:text-white mb-2"
+      on:click={() => toggleSection('channels')}
+    >
+      <span class="font-medium text-sm uppercase tracking-wide">Channels</span>
+      <span class="text-xs">{channelsExpanded ? '▼' : '▶'}</span>
+    </button>
+    
+    {#if channelsExpanded}
+      <div class="space-y-1">
+        {#each channels as channel}
+          <PlaygroundLabel
+            name={channel}
+            role=""
+            status=""
+            snippet=""
+            isActive={currentSelection.type === 'channel' && currentSelection.item === channel}
+            onClick={() => selectItem('channel', channel)}
+          />
+        {/each}
+      </div>
+    {/if}
+  </div>
+
+  <!-- Agents Section -->
+  <div class="p-4">
+    <button
+      class="flex items-center justify-between w-full text-left text-gray-300 hover:text-white mb-2"
+      on:click={() => toggleSection('agents')}
+    >
+      <span class="font-medium text-sm uppercase tracking-wide">Agents</span>
+      <span class="text-xs">{agentsExpanded ? '▼' : '▶'}</span>
+    </button>
+    
+    {#if agentsExpanded}
+      <div class="space-y-1">
+        {#each agents as agent}
+          <PlaygroundLabel
+            name={agent}
+            role="Agent"
+            status="Online"
+            snippet="Ready to assist"
+            isActive={currentSelection.type === 'agent' && currentSelection.item === agent}
+            onClick={() => selectItem('agent', agent)}
+          />
+        {/each}
+      </div>
+    {/if}
+  </div>
+
+  <!-- Artifacts Section -->
+  <div class="p-4">
+    <button
+      class="flex items-center justify-between w-full text-left text-gray-300 hover:text-white mb-2"
+      on:click={() => toggleSection('artifacts')}
+    >
+      <span class="font-medium text-sm uppercase tracking-wide">Artifacts</span>
+      <span class="text-xs">{artifactsExpanded ? '▼' : '▶'}</span>
+    </button>
+    
+    {#if artifactsExpanded}
+      <div class="space-y-1">
+        {#each artifacts as artifact}
+          <PlaygroundLabel
+            name={artifact}
+            role="Resource"
+            status="Available"
+            snippet="Click to view"
+            isActive={currentSelection.type === 'artifact' && currentSelection.item === artifact}
+            onClick={() => selectItem('artifact', artifact)}
+          />
+        {/each}
+      </div>
+    {/if}
+  </div>
+</div>

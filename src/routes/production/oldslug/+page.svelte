@@ -1,6 +1,12 @@
 <script lang="ts">
+  import { applyAction, enhance } from "$app/forms"
+  import type { SubmitFunction } from "@sveltejs/kit"
   import RSkunkWorks from "./RSkunkWorks.svelte"
   import "@src/app.css"
+
+  interface User {
+    email: string
+  }
 
   interface Profile {
     full_name?: string
@@ -9,30 +15,44 @@
   }
 
   interface Props {
-    data: { user: User; profile: Profile, channels: Array, skunkwork: Object }
+    data: { user: User; profile: Profile }
+    skunkwork: Object // RProduction
   }
 
-  let { data }: Props = $props()
+  let { data, skunkwork }: Props = $props()
 
-  let skunkwork = data.skunkwork || { name: "My Production" }
+  skunkwork = skunkwork || { name: "My Production" }
 
-  let { user, profile, channels, visiteds } = data
+  let { user, profile, channel } = data
 
   let loading = $state(false)
   let fullName: string = profile?.full_name ?? ""
   let companyName: string = profile?.company_name ?? ""
   let website: string = profile?.website ?? ""
 
+  const fieldError = (liveForm: FormAccountUpdateResult, name: string) => {
+    let errors = liveForm?.errorFields ?? []
+    return errors.includes(name)
+  }
+
+  const handleSubmit: SubmitFunction = () => {
+    loading = true
+    return async ({ update, result }) => {
+      await update({ reset: false })
+      await applyAction(result)
+      loading = false
+    }
+  }
 </script>
 
 <svelte:head>
-  <title>A Rockstar Production: {skunkwork.name}</title>
+  <title>Production {skunkwork.name}</title>
 </svelte:head>
 
 <div class="Production">
   <div class="flex flex-col w-64 lg:w-80">
     <div>
-      <h1 class="text-2xl font-bold mb-6">{skunkwork.name}</h1>
+      <h1 class="text-2xl font-bold mb-6">Production {skunkwork.name}</h1>
       <RSkunkWorks channels={data.channels} user={data.user} visiteds={data.visiteds} />
       <div class="text-sm text-slate-800 mt-14">
         You are logged in as {user?.email}.

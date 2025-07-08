@@ -1,7 +1,7 @@
 import { PRIVATE_STRIPE_API_KEY } from "$env/static/private"
 import { error, redirect } from "@sveltejs/kit"
 import type { PageServerLoad } from "./$types"
-import { getChannels, getVistedChannelTimestamps, getProfile } from "@store/Store"
+import { getChannels, getVistedChannelTimestamps } from "@store/Store"
 
 export const load: PageServerLoad = async ({
   params,
@@ -13,11 +13,11 @@ console.log("ENTER [slug] page.server.ts");
   if (session) {
 	    session.guest = !!user.subscribed;
    } else {
-	session.guest = true;
+		session.guest = true;
    }
+	//const user = Store.getUser();
 console.log("CALL getChannels [slug] page.server.ts");
-	const profile = getProfile(user);
 	const channels = getChannels(user);
 	const visiteds = getVistedChannelTimestamps(user);
-	return { data: { channels, user, visiteds, profile }};
+	return { data: { channels, user, visiteds }};
 }

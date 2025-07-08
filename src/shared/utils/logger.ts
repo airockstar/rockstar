@@ -32,39 +32,52 @@ const logLevels = {
 const logOptions: LogOptions = {
 	date: false,
 	debug: {
-		color: "#4C91E8",
-		spaced: true
+		color: "magenta",
+		spaced: true,
+		prefix: {
+			color: "magenta"
+		}
 	},
 	info: {
+		color: "blue",
 		prefix: {
-			color: "tan"
+			color: "blue"
 		},
-		color: "#CDCDCD"
 	},
 	error: {
-		color: "tan",
+		color: "red",
 		prefix: {
-			color: "coral"
+			color: "red"
 		}
 	},
 	warn: {
-		color: "lightyellow",
+		color: "orange",
 		prefix: {
-			color: "yellow"
+			color: "orange"
 		}
 	}
 };
 
-class logger {
+class Logger {
 	private level: LogLevel;
 	date: boolean;
-	formattedDate: string;
+	formattedDate: boolean;
 	options: LogOptions;
+	filename: string;
 
-	constructor(maxLevel: LogLevel, options: LogOptions = logOptions) {
+	constructor(filename: string, maxLevel: LogLevel = "debug", formattedDate: boolean, options: LogOptions = logOptions) {
+		this.filename = filename || "";
+		if (this.filename) {
+			let arr = this.filename.split("/");
+			while (arr.length > 4) {
+				arr.shift();
+			}
+			this.filename = arr.join('/');
+		}
+		this.filename = this.filename.split("?")[0];
 		this.date = options.date;
 		this.level = maxLevel;
-		this.formattedDate = parseTime(new Date());
+		this.formattedDate = formattedDate;
 		this.options = options;
 	}
 
@@ -85,7 +98,7 @@ class logger {
 	 * @returns {string} Prefix string attached to the log level
 	 */
 	private prefix(level: LogLevel): string {
-		return `%c[${level.toUpperCase()}]%c ${this.date ? " [" + this.formattedDate + "]" : ""}`;
+		return `%c${level == "error" ? "[" + level.toUpperCase() + "]" : ""}%c ${this.formattedDate ? " [" + parseTime(new Date()) + "]" : ""} ${this.filename}: `;
 	}
 
 	/**
@@ -119,9 +132,16 @@ class logger {
 	 * @param level
 	 * @returns
 	 */
-	private constructMessage(message: unknown[], level: LogLevel): { message: unknown[]; objects: unknown[] } {
+	private constructMessage(message: unknown[], level: LogLevel, enterExit: string): { message: unknown[]; objects: unknown[] } {
 		const objects = [];
 		message = [logOptions[level].prefix ? `${this.prefix(level)}` : "%c", ...message];
+
+		if (message.length > 1) {
+			message[1] += "()";
+		}
+		if (enterExit) {
+			message = [enterExit, ...message];
+		}
 
 		return {
 			message: message.map((message, i) => {
@@ -165,14 +185,15 @@ class logger {
 	}
 
 	enter(...message: unknown[]) {
-		return this.log("error", ["ENTER", ...message]);
+		return this.log("info", message, "ENTER");
 	}
 
 	exit(...message: unknown[]) {
-		return this.log("error", ["EXIT", ...message]);
+		return this.log("info", message, "EXIT");
 	}
 }
 
-const log = new logger("debug");
+export function getLogger(location, showTimestamp, level) {
+	return new Logger(location, showTimestamp, level);
+}
 
-export { log };

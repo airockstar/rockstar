@@ -1,4 +1,6 @@
 
+import { getLogger } from "@utils/logger"
+const log = getLogger(import.meta.url);
 
 export function createMockDatabaseClient() {
 	return new RMockClient();
@@ -15,16 +17,20 @@ const db = {
 		{ name: "Sue", role: "QA", updated_on: Date.now()},
 	],
 	user: [
-		{ name: "Bob", roles: ["Developer", "QA" ] }
+		{ email: "mock@mock.com" }
+	],
+	profile: [
+		{ name: "Mike", email: "mike@rockstar.ai", roles: ["Developer","QA"] }
 	]
 };
 
 function RMockClient() {
-	this.data = [];
-	this.error = null;
+	let data = [];
+	let error = null;
 	this.from = (tableName) => {
-		this.data = db[tableName] || [];
-		return this;
+		log.enter("from", tableName);
+		data = db[tableName] || [];
+		return this._getReturn();
 	}
 	this.select = (fields) => {
 		let res = [];
@@ -39,25 +45,34 @@ function RMockClient() {
 				}
 				res.push(d);
 			}
-			this.data = res;
+			data = res;
 		}
-		return this;
+		return this._getReturn();
 	}
 	this.eq = (name, value) => {
 		let res = [];
-		for (let i = 0; i < this.data.length; ++i) {
-			if (this.data[i][name] == value) {
-				res.push(this.data[i]);
+		for (let i = 0; i < data.length; ++i) {
+			if (data[i][name] == value) {
+				res.push(data[i]);
 			}
 		}
-		this.data = res;
-		return this;
+		data = res;
+		return this._getReturn();
 	}
 	this.single = () => {
-		this.data = this.data[1];
-		return this;
+		data = data[1];
+		return this._getReturn();
 	}
 	this.auth = {
 		getUser: (id) => { return { data: db.user[0] , error: null } }
+	}
+	this._getReturn = () => {
+		let ret = { data, error };
+		ret.from = this.from;
+		ret.eq = this.eq;
+		ret.select = this.select;
+		ret.single = this.single;
+		log.exit("returning", JSON.stringify(ret));
+		return ret;
 	}
 }

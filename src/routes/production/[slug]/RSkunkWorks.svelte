@@ -1,63 +1,50 @@
+
 <script lang="ts">
-	import Sidebar from "../components/sidebar/Sidebar.svelte";
-	import RSidebar from "./RSidebar.svelte";
-	import RChat from "./RChat.svelte";
-	import { socket } from "@utils/socket";
-	import { onDestroy, onMount } from "svelte";
-	import type { User } from "$lib/types";
-	import { onlineUsers } from "../store/users";
-	import { log } from "@utils/logger";
-	import Topbar from "@components/topbar/Topbar.svelte";
-	export let channels;
-	export let visiteds;
-	export let user;
+  import { writable } from 'svelte/store';
+  import PlaygroundLabel from './PlaygroundLabel.svelte';
+  import ChatPanel from './ChatPanel.svelte';
+  import Sidebar from './Sidebar.svelte';
+  import { getLogger } from "@utils/logger";
+  export let channels;
+  export let visiteds;
+  export let user;
+  export let profile;
+  export let skunkwork;
 
-	socket.on("user:active", (users: User[]) => {
-		$onlineUsers = users;
-	});
+  export let activeSelection = writable<{
+    type: 'channel' | 'agent' | 'artifact';
+    item: string;
+  }>({ type: 'channel', item: 'General' });
 
-	// Maintain online users
-	socket.on("user:connected", (user: User) => {
-		onlineUsers.update((users) => {
-			users.push(user);
-			return users;
-		});
-	});
+//  const channels = [
+ //   'General', 'Defects', 'Feedback', 'Reports', 'Security', 'Analytics', 'SEO'
+//  ];
 
-	socket.on("user:disconnected", (user: User) => {
-		onlineUsers.update((users) => {
-			return (users = users.filter((onlineUsers) => onlineUsers.username != user.username));
-		});
-	});
+  const agents = [
+    'CEO', 'Admin', 'Troubleshooter', 'SecOps', 'Manager', 'PM', 'Analyst', 
+    'Architect', 'UX Designer', 'Developer', 'Code Reviewer', 'Code Committer', 
+    'Tester', 'Test Writer', 'QA', 'Documentor', 'DevOps', 'HealthOps'
+  ];
 
-	socket.on("connect", async () => {
-		log.info("Established websocket connection");
-	});
-
-	onMount(() => {
-		if (!socket.connected) socket.connect();
-	});
-
-	onDestroy(() => {
-		socket.removeAllListeners();
-	});
+  const artifacts = [
+    'Code base', 'SCM', 'UI', 'Documents', 'Website', 'Tests', 'Database'
+  ];
 </script>
 
-<div class="wrapper">
-    <Topbar />
-    <div class="wrapper">
-	<RSidebar user={user} channels={channels} visiteds={visiteds} />
-	<RChat />
-    </div>
-</div>
+<div class="flex h-screen bg-gray-50">
+  <!-- Left Sidebar -->
+  <div class="w-64 bg-gray-800 text-white flex flex-col">
+    <Sidebar 
+      {channels} 
+      {agents} 
+      {artifacts} 
+      {activeSelection}
+    />
+  </div>
 
-<style lang="scss">
-	.wrapper {
-		height: 100%;
-		background-color: var(--color-white-s1);
-		display: grid;
-		grid-template-columns: auto 1fr;
-		grid-template-rows: auto 1fr;
-	}
-</style>
+  <!-- Main Chat Panel -->
+  <div class="flex-1 flex flex-col">
+    <ChatPanel {activeSelection} />
+  </div>
+</div>
 
