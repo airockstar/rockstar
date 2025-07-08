@@ -6,19 +6,18 @@ import { supabase } from '$lib/supabaseClient';
 import { getLogger } from "@utils/logger"
 const log = getLogger(import.meta.url);
 
-export function getChannels(user) {
+export async function getChannels(user) {
 	log.enter("getChannels");
 	let channels = [];
-	(async () => {
 		const { data, error } = await supabase.from('channel').select('*');
         	if (error) {
-			console.error('Error fetching channels:', error.message);
+			log.error('Error fetching channels:', error.message);
 		} else {
 			channels = data;
+			log.info("getChannels", "data: " + JSON.stringify(data));
 		}
-	})();
-	log.exit("getChannels", "channels: " + JSON.stringify(channels));
-	return channels;
+		log.exit("getChannels", "channels: " + JSON.stringify(channels));
+		return channels;
 };
 
 export function getVistedChannelTimestamps(user) {
@@ -30,8 +29,8 @@ export function getVistedChannelTimestamps(user) {
 		} else {
 			visits = data;
 		}
+		return visits;
 	})();
-	return visits;
 };
 
 
@@ -44,8 +43,8 @@ export function getProfile(user) {
 		} else {
 			profile = data;
 		}
+		return profile;
 	})();
-	return profile;
 };
 
 

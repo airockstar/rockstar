@@ -86,3 +86,11 @@ button[disabled].authBtn::before {
   content: "Loading...";
   color: oklch(var(--pc));
 }
+
+html, body {
+	height: 100%;
+	width: 100%;
+	display: block;
+	box-sizing: border-box;
+	overflow: hidden;
+}

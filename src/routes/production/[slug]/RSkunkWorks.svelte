@@ -5,16 +5,21 @@
   import ChatPanel from './ChatPanel.svelte';
   import Sidebar from './Sidebar.svelte';
   import { getLogger } from "@utils/logger";
-  export let channels;
-  export let visiteds;
-  export let user;
-  export let profile;
-  export let skunkwork;
+//  export let channels;
+ // export let visiteds;
+ // export let user;
+ // export let profile;
+ // export let skunkwork;
+  const log = getLogger(import.meta.url);
 
-  export let activeSelection = writable<{
+
+
+  let activeSelection = writable<{
     type: 'channel' | 'agent' | 'artifact';
     item: string;
   }>({ type: 'channel', item: 'General' });
+
+
 
 //  const channels = [
  //   'General', 'Defects', 'Feedback', 'Reports', 'Security', 'Analytics', 'SEO'
@@ -29,6 +34,12 @@
   const artifacts = [
     'Code base', 'SCM', 'UI', 'Documents', 'Website', 'Tests', 'Database'
   ];
+
+
+
+  let { data }: Props = $props()
+  let { user, profile, channels, visiteds, skunkwork } = data || {}
+  log.info("load", "channels=" + channels);
 </script>
 
 <div class="flex h-screen bg-gray-50">

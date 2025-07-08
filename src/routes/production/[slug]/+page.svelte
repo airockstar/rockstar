@@ -1,6 +1,10 @@
 <script lang="ts">
   import RSkunkWorks from "./RSkunkWorks.svelte"
   import "@src/app.css"
+  import { page } from '$app/state';
+import { setContext } from 'svelte';
+  import { getLogger } from "@utils/logger";
+  const log = getLogger(import.meta.url);
 
   interface Profile {
     full_name?: string
@@ -13,10 +17,16 @@
   }
 
   let { data }: Props = $props()
+  log.info("load", "data=" + (data && JSON.stringify(data)));
 
-  let skunkwork = data.skunkwork || { name: "My Production" }
+	setContext('data', () => data);
 
-  let { user, profile, channels, visiteds } = data
+
+  let { user, profile, channels, visiteds, skunkwork } = data
+  skunkwork = skunkwork || { name: "My Production" }
+
+  log.info("load", "page.params.slug=" + page.params.slug);
+  log.info("load", "channels=" + channels);
 
   let loading = $state(false)
   let fullName: string = profile?.full_name ?? ""
@@ -30,7 +40,6 @@
 </svelte:head>
 
 <div class="Production">
-  <div class="flex flex-col w-64 lg:w-80">
     <div>
       <h1 class="text-2xl font-bold mb-6">{skunkwork.name}</h1>
       <RSkunkWorks channels={data.channels} user={data.user} visiteds={data.visiteds} />
@@ -40,7 +49,6 @@
         <a class="underline" href="/account/sign_out"> Sign out </a>
       </div>
     </div>
-  </div>
 </div>
 
 <style lang="scss">

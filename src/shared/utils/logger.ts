@@ -163,7 +163,7 @@ class Logger {
 	log(level: LogLevel, message: unknown[], options?: LogOptions) {
 		if (this.levelSilenced(logLevels[level])) return;
 
-		const messageConstruct = this.constructMessage(message, level);
+		const messageConstruct = this.constructMessage(message, level, options);
 
 		console.info(messageConstruct.message.join(""), ...this.formatStyle(level), ...messageConstruct.objects);
 	}
