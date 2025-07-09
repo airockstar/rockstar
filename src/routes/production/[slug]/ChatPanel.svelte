@@ -95,18 +95,10 @@
 </script>
 
 <div class="flex flex-col h-full">
-  <!-- Header -->
-  <div class="bg-white border-b border-gray-200 p-4">
-    <h2 class="text-lg font-semibold text-gray-900">
-      {currentSelection.item}
-      <span class="text-sm text-gray-500 ml-2">({currentSelection.type})</span>
-    </h2>
-  </div>
-
   <!-- Messages Container -->
   <div 
     bind:this={messagesContainer}
-    class="flex-1 overflow-y-auto p-4 space-y-4 bg-white"
+    class="flex-1 overflow-y-auto p-4 space-y-4"
   >
     {#each messages as message (message.id)}
       <div class="flex flex-col">
@@ -134,6 +126,7 @@
     />
   </div>
 </div>
+
 
 <!--
 

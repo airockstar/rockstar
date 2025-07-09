@@ -1,7 +1,6 @@
 
 <script lang="ts">
   import { writable } from 'svelte/store';
-  import PlaygroundLabel from './PlaygroundLabel.svelte';
   import ChatPanel from './ChatPanel.svelte';
   import Sidebar from './Sidebar.svelte';
   import { getLogger } from "@utils/logger";
@@ -44,9 +43,7 @@ import { getContext } from 'svelte';
 
 */
 
-   let data = getContext('productionData')();
-
-
+  let data = getContext('productionData')();
   let { user, profile, channels, agents, artifacts, visiteds, skunkwork } = data
 
 
@@ -58,7 +55,7 @@ import { getContext } from 'svelte';
 
 <div class="flex h-screen bg-gray-50">
   <!-- Left Sidebar -->
-  <div class="w-64 bg-gray-800 text-white flex flex-col">
+  <div class="w-44 bg-current text-white flex flex-col">
     <Sidebar 
       {channels} 
       {agents} 
@@ -68,8 +65,15 @@ import { getContext } from 'svelte';
   </div>
 
   <!-- Main Chat Panel -->
-  <div class="flex-1 flex flex-col">
+  <div class="ChatContainer flex-1 flex flex-col">
     <ChatPanel {activeSelection} />
   </div>
 </div>
+
+<style lang="scss">
+	.ChatContainer {
+		border-radius: 2em;
+		background: #fff;
+	}
+</style>
 

@@ -1,3 +1,4 @@
+
 @import "tailwindcss";
 
 @plugin '@tailwindcss/typography';
@@ -65,7 +66,7 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+    border-color: var(--color-white, currentColor);
   }
 }
 
@@ -93,4 +94,6 @@ html, body {
 	display: block;
 	box-sizing: border-box;
 	overflow: hidden;
+	background-color: white;
+	border: 0;
 }

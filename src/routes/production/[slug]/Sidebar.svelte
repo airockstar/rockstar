@@ -1,6 +1,7 @@
 <script lang="ts">
   import { writable, type Writable } from 'svelte/store';
-  import PlaygroundLabel from './PlaygroundLabel.svelte';
+  import SidebarLabel from './SidebarLabel.svelte';
+  import SidebarAgentLabel from './SidebarAgentLabel.svelte';
 
   export let channels: object[];
   export let agents: object[];
@@ -26,16 +27,11 @@
   }
 </script>
 
-<div class="flex flex-col h-full overflow-y-auto">
-  <!-- Header -->
-  <div class="p-4 border-b border-gray-700">
-    <h1 class="text-xl font-bold text-white">Workspace</h1>
-  </div>
-
+<div class="Sidebar flex flex-col h-full overflow-y-auto">
   <!-- Channels Section -->
   <div class="p-4">
     <button
-      class="flex items-center justify-between w-full text-left text-gray-300 hover:text-white mb-2"
+      class="flex items-center justify-between w-full text-left text-gray-600 hover:text-black mb-2"
       on:click={() => toggleSection('channels')}
     >
       <span class="font-medium text-sm uppercase tracking-wide">Channels</span>
@@ -45,7 +41,7 @@
     {#if channelsExpanded}
       <div class="space-y-1">
         {#each channels as channel}
-          <PlaygroundLabel
+          <SidebarLabel
             name={channel.name}
             role={channel.role}
             status={channel.status}
@@ -61,7 +57,7 @@
   <!-- Agents Section -->
   <div class="p-4">
     <button
-      class="flex items-center justify-between w-full text-left text-gray-300 hover:text-white mb-2"
+      class="flex items-center justify-between w-full text-left text-gray-600 hover:text-black mb-2"
       on:click={() => toggleSection('agents')}
     >
       <span class="font-medium text-sm uppercase tracking-wide">Agents</span>
@@ -71,11 +67,7 @@
     {#if agentsExpanded}
       <div class="space-y-1">
         {#each agents as agent}
-          <PlaygroundLabel
-            name={agent.name}
-            role={agent.role}
-            status={agent.status}
-            snippet={agent.snippet}
+          <SidebarAgentLabel agent={agent}
             isActive={currentSelection === agent.guid}
             onClick={() => selectItem('agent', agent.guid)}
           />
@@ -87,7 +79,7 @@
   <!-- Artifacts Section -->
   <div class="p-4">
     <button
-      class="flex items-center justify-between w-full text-left text-gray-300 hover:text-white mb-2"
+      class="flex items-center justify-between w-full text-left text-gray-600 hover:text-black mb-2"
       on:click={() => toggleSection('artifacts')}
     >
       <span class="font-medium text-sm uppercase tracking-wide">Artifacts</span>
@@ -97,7 +89,7 @@
     {#if artifactsExpanded}
       <div class="space-y-1">
         {#each artifacts as artifact}
-          <PlaygroundLabel
+          <SidebarLabel
             name={artifact.name}
             role={artifact.role}
             status={artifact.status}
@@ -110,3 +102,9 @@
     {/if}
   </div>
 </div>
+
+<style lang="scss">
+	.Sidebar {
+		background-color: #f8f8ff;
+	}
+</style>
