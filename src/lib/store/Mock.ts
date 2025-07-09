@@ -55,6 +55,11 @@ function RMockClient() {
 		return this._getReturn();
 	}
 	this.eq = (name, value) => {
+		if (typeof name == "obect") {
+			let key = Object.keys(name);
+			value = name[key];
+			name = key;
+		}
 		let res = [];
 		for (let i = 0; i < data.length; ++i) {
 			if (data[i][name] == value) {

@@ -17,12 +17,13 @@ console.log("ENTER [slug] page.server.ts");
   const { session } = await safeGetSession()
 	let user = supabase.auth.getUser();
 	//const profile = db.getProfile(user);
-	const data = await db.getUserBundle(user, { profile: "*", channels: "*", agents: "*", artifacts: "*", visiteds: "*" } );
-//	//const channels = await db.getChannels(user);
-	log.info("load", "channels=" + JSON.stringify(data.channels));
+	const d = await db.getUserBundle(user, { profile: { eq: { user_id: user.id } }, channel: {}, agent: {}, artifact: {}, visited: { eq: { user_id: user.id } } });
+	log.info("loaddddddddddddd", "d=" + JSON.stringify(d));
+	const data = { channels: d.channel, agents: d.agent, artifacts: d.artifact, profile: d.profile, visiteds: d.visited };
+	log.info("loadddddddddddddddd", "channels=" + JSON.stringify(data.channels));
+	log.info("loadddddddddddddddd", "agents=" + JSON.stringify(data.agents));
 //	const channel = db.getChannel(params.slug);
-//	const visiteds = await db.getVistedChannelTimestamps(user);
-	const test = { test: "helpmespok" };
+	const test = { test: "helpmespock" };
 	data.user = user;
 	data.test = test;
 	return data;

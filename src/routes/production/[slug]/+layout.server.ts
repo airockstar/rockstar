@@ -9,6 +9,7 @@ import type { LayoutServerLoad } from './$types';
   const log = getLogger(import.meta.url);
 
 export const load: LayoutServerLoad = async () => {
+/*
 	let user = supabase.auth.getUser();
 	const profile = db.getProfile(user);
 	const channels = await db.getChannels(user);
@@ -17,5 +18,17 @@ export const load: LayoutServerLoad = async () => {
 	const visiteds = db.getVistedChannelTimestamps(user);
 	const test = { test: "helpmespok" };
 	return { channels, user, visiteds, profile, test };
+
+	let user = supabase.auth.getUser();
+	const d = await db.getUserBundle(user, { profile: { eq: { user_id: user.id } }, channel: {}, agent: {}, artifact: {}, visited: { eq: { user_id: user.id } } });
+	const data = { channels: d.channel, agents: d.agent, artifacts: d.artifact, profile: d.profile, visiteds: d.visited };
+
+	log.info("LayoutServerLoad", "channels=" + JSON.stringify(data.channels));
+//	const channel = db.getChannel(params.slug);
+	const test = { test: "helpmespok" };
+	data.user = user;
+	data.test = test;
+	return data;
+*/
 }
 

@@ -5,11 +5,17 @@
   import ChatPanel from './ChatPanel.svelte';
   import Sidebar from './Sidebar.svelte';
   import { getLogger } from "@utils/logger";
+import { getContext } from 'svelte';
+
+/*
   export let channels;
   export let visiteds;
+  export let agents;
+  export let artifacts;
   export let user;
   export let profile;
   export let skunkwork;
+*/
   const log = getLogger(import.meta.url);
 
 
@@ -25,6 +31,7 @@
  //   'General', 'Defects', 'Feedback', 'Reports', 'Security', 'Analytics', 'SEO'
 //  ];
 
+/*
   const agents = [
     'CEO', 'Admin', 'Troubleshooter', 'SecOps', 'Manager', 'PM', 'Analyst', 
     'Architect', 'UX Designer', 'Developer', 'Code Reviewer', 'Code Committer', 
@@ -35,11 +42,18 @@
     'Code base', 'SCM', 'UI', 'Documents', 'Website', 'Tests', 'Database'
   ];
 
+*/
+
+   let data = getContext('productionData')();
+
+
+  let { user, profile, channels, agents, artifacts, visiteds, skunkwork } = data
 
 
 //  let { data }: Props = $props()
 //  let { user, profile, channels, visiteds, skunkwork } = data || {}
   log.info("load", "channels=" + JSON.stringify(channels));
+  log.info("load", "agents=" + JSON.stringify(agents));
 </script>
 
 <div class="flex h-screen bg-gray-50">

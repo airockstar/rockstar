@@ -6,6 +6,10 @@ import { supabase } from '$lib/supabaseClient';
 import { getLogger } from "@utils/logger"
 const log = getLogger(import.meta.url);
 
+
+/**
+ supabase-js requires eq to be after select
+**/
 export async function getChannels(user) {
 	log.enter("getChannels");
 	let channels = [];
@@ -25,27 +29,50 @@ export async function getUserBundle(user, what) {
 	let res = {};
 	const promises = [];
 	const tables = Object.keys(what);
+	
+	let str = "";
 	for (let i = 0; i < tables.length; ++i) {
 		const tableName = tables[i];
-		const query = what[tableName];
-		new Promise((resolve, reject) => {
- 			let { data, error } = supabase.from(tables[i]).eq(query);
-			if (error) {
-            			reject(error);
+		str += "db.from(" + tableName + ")";
+		if (what[tableName].select) {
+			str += ".select(" + what[tableName].select + ")";
+		}
+		if (what[tableName].eq) {
+			str += ".eq(" + JSON.stringify(what[tableName].eq) + ")";
+		}
+	}
+	log.info("getUserBundle: query=" + str);
+	
+	for (let i = 0; i < tables.length; ++i) {
+		const tableName = tables[i];
+		const filter = what[tableName];
+		promises.push(new Promise((resolve, reject) => {
+ 			let query = supabase.from(tables[i]);
+			if (filter.select && !query.error) {
+ 				query = query.select(filter.select);
+			}
+			if (filter.eq && !query.error) {
+ 				query = query.eq(filter.eq);
+			}
+			if (query.error) {
+            			reject(query.error);
         		} else {
-            			resolve(data);
+log.info("getUserBundle data=" + tables[i] + "," + JSON.stringify(query.data))
+            			resolve(query.data);
 			}
-		});
+		}));
         }
-   	Promise.all(promises)
-        	.then(values => {
-			for (let i = 0; i < values.length; ++i) {
-				res[ tables[i]] = values[i];
-			}
-        	})
-        	.catch(error => {
-            		console.error('One of the promises rejected:', error);
-        	});
+	try {
+   		const values = await Promise.all(promises)
+log.info("promised THENNNNNNNNNNNNNNNNNNNNNNN values.length=" + values.length);
+		for (let i = 0; i < values.length; ++i) {
+log.info("promised value = " + JSON.stringify(values[i]));
+			res[tables[i]] = values[i];
+		}
+       	} catch(error) {
+           	log.error('One of the promises rejected:', error);
+		res = {};
+        }
 	log.exit("getUserBundle", "res: " + JSON.stringify(res));
 	return res;
 };

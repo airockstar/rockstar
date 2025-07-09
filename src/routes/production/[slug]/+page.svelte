@@ -19,19 +19,22 @@ import { setContext } from 'svelte';
   let { data }: Props = $props()
   log.info("load", "data=" + (data && JSON.stringify(data)));
 
-	setContext('data', () => data);
+   setContext('productionData', () => data);
 
-
-  let { user, profile, channels, visiteds, skunkwork } = data
+  let { skunkwork } = data
   skunkwork = skunkwork || { name: "My Production" }
+
+/*
 
   log.info("load", "page.params.slug=" + page.params.slug);
   log.info("load", "channels=" + channels);
+  log.info("load", "agents=" + agents);
 
   let loading = $state(false)
   let fullName: string = profile?.full_name ?? ""
   let companyName: string = profile?.company_name ?? ""
   let website: string = profile?.website ?? ""
+*/
 
 </script>
 
@@ -42,12 +45,7 @@ import { setContext } from 'svelte';
 <div class="Production">
     <div>
       <h1 class="text-2xl font-bold mb-6">{skunkwork.name}</h1>
-      <RSkunkWorks channels={data.channels} user={data.user} visiteds={data.visiteds} />
-      <div class="text-sm text-slate-800 mt-14">
-        You are logged in as {user?.email}.
-        <br />
-        <a class="underline" href="/account/sign_out"> Sign out </a>
-      </div>
+      <RSkunkWorks />
     </div>
 </div>
 
