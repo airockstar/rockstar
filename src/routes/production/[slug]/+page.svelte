@@ -44,7 +44,7 @@ import { setContext } from 'svelte';
 
 <div class="Production">
     <div>
-      <h1 class="text-2xl font-bold m-6">{skunkwork.name}</h1>
+      <h1 class="text-2xl m-6">{skunkwork.name}</h1>
       <RSkunkWorks />
     </div>
 </div>
@@ -53,6 +53,6 @@ import { setContext } from 'svelte';
 	.Production {
 		width: 100%;
 		height: 100%;
-		background-color: #f8f8fe;
+		background-color: var(--color-background-surround);
 	}
 </style>

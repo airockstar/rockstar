@@ -89,6 +89,7 @@
 			{ name: "website", type: "string", maxlength: 1024 },
 			{ name: "email", type: "string", maxlength: 1024, notnull: true },
 			{ name: "description", type: "text",  maxlength: 4096 },
+			{ name: "theme", type: "string",  maxlength: 40 },
 			{ name: "owner", type: "string",  table: "user", notnull: true },
 			{ name: "created_at", type: "integer" },
 			{ name: "updated_at", type: "integer" },
@@ -118,7 +119,7 @@
 			{ name: "updated_at", type: "integer" },
 		]
 	},
-	tagteam: {
+	tagteam/collaboration: {
 		columns: [
 			{ name: "uuid", type: "text", maxlength: 40, unique: true, index: true },
 			{ name: "id", type: "integer", unique: true, index: true, autoincrement: true },
@@ -135,6 +136,6 @@
 
 }}
 
-// prd, dependency graph, artifacts, channels, hashtags for skillsets, etc.
+// prd, dependency graph, artifacts, channels, hashtags for skillsets, etc. defauls, artifact kinds: "webbsite" db, etc. Production/Skunkwork/Organization/enterprise/Performance (other meetings)/Collaboration, mission/goals, agent pool, activated vs on the bench, status, task < goal < mission, team & team dynamics - they want to work for YOU
 		
 

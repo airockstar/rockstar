@@ -105,6 +105,6 @@
 
 <style lang="scss">
 	.Sidebar {
-		background-color: #f8f8ff;
+		background-color: var(--color-background-surround);
 	}
 </style>

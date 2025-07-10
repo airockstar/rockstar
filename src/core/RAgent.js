@@ -2,6 +2,7 @@
 
 const TABLENAME = "Agent";
 
+import Anthropic from '@anthropic-ai/sdk';
 class RAgent {
 	static agents = {};
 	static create(ctx, name, persona, roles, description) {
@@ -40,6 +41,17 @@ class RAgent {
 	execute(ctx, mission) {
 		const prefs = RPreferences.getForAgent(ctx, this.guid, mission);
 		switch (prefs.model) {
+
+const anthropic = new Anthropic({
+  apiKey: 'my_api_key', // defaults to process.env["ANTHROPIC_API_KEY"]
+});
+
+const msg = await anthropic.messages.create({
+  model: "claude-sonnet-4-20250514",
+  max_tokens: 1024,
+  messages: [{ role: "user", content: "Hello, Claude" }],
+});
+console.log(msg);
 
 
 		}

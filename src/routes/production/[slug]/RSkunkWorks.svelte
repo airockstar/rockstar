@@ -53,7 +53,7 @@ import { getContext } from 'svelte';
   log.info("load", "agents=" + JSON.stringify(agents));
 </script>
 
-<div class="flex h-screen bg-gray-50">
+<div class="flex h-screen">
   <!-- Left Sidebar -->
   <div class="w-44 bg-current text-white flex flex-col">
     <Sidebar 
