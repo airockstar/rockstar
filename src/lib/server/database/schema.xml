@@ -1,0 +1,24 @@
+
+<xml>
+	<table name="agent">
+		<column name="uuid" type="text" max-length="40" unique="true" index="true" />
+		<column name="name" type="text" max-length="80" unique="true" primary-key="true" autoincrement="true" index="true" />
+		<column name="persona" type="text" max-length="100000" />
+		<column name="persona" type="reference" table="persona" />
+		<column name="role" type="reference" table="role" />
+		<column name="context" type="reference" table="context" />
+		<column name="output" type="reference" table="history" />
+		<column name="prompts" type="reference" table="history" />
+	</table>
+
+		<column type="text" name="customization" max-length="100000" />
+		
+	KIND_TO_TABLE_MAP: { 
+		"uri:lessonplan": { tablename: "LessonPlan", attributes: ["uri", "version", "semester", "course", "classnum", "steps", "format", "updated_at", "updated_by", "last_step_id", "step_count", "comment_count", "rev", "lesson_title"], keys: ["uri", "version"]}, 
+		"teacherclassassignments": { tablename: "TeacherClassAssignments", attributes: ["teacher", "class_instance_id"], keys: ["teacher"] },
+		"pollresults": { tablename: "PollResults", attributes: ["uri", "choices"], keys: ["uri"] },
+		"counter": { tablename: "Counter", attributes: ["count"], keys: ["uri"] },
+		"chat": { tablename: "Chat", attributes: ["uri"], keys: ["uri"] },
+
+
+		
