@@ -1,7 +1,7 @@
 import { PRIVATE_STRIPE_API_KEY } from "$env/static/private"
 import { error, redirect } from "@sveltejs/kit"
 import type { PageServerLoad } from "./$types"
-import { getChannels, getVistedChannelTimestamps, getProfile, getUserBundle } from "@store/Store"
+import { getBundle } from "@bundles/Enterprise"
 import { supabase } from "$lib/supabaseClient"
 import * as db from "@store/Store"
  import { getLogger } from "@utils/logger";
@@ -17,7 +17,7 @@ console.log("ENTER [slug] page.server.ts");
   const { session } = await safeGetSession()
 	let user = supabase.auth.getUser();
 	//const profile = db.getProfile(user);
-	const d = await db.getUserBundle(user, { profile: { eq: { user_id: user.id } }, channel: {}, agent: {}, artifact: {}, visited: { eq: { user_id: user.id } } });
+	const d = await getBundle(user, { profile: { eq: { user_id: user.id } }, channel: {}, agent: {}, artifact: {}, visited: { eq: { user_id: user.id } } });
 	log.info("loaddddddddddddd", "d=" + JSON.stringify(d));
 	const data = { channels: d.channel, agents: d.agent, artifacts: d.artifact, profile: d.profile, visiteds: d.visited };
 	log.info("loadddddddddddddddd", "channels=" + JSON.stringify(data.channels));

@@ -7,7 +7,6 @@ import { getLogger } from "@utils/logger"
 const log = getLogger(import.meta.url);
 
 
-
 /**
  supabase-js requires eq to be after select
 **/

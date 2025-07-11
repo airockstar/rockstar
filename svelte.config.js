@@ -15,11 +15,15 @@ const config = {
         "@skunkworks": 'src/routes/production',
         "@home": 'src/routes/(home)',
         "@src": 'src',
-        "@utils": 'src/shared/utils',
+        "@lib": 'src/lib',
+        "@utils": 'src/lib/shared/utils',
+        "@bundles": 'src/lib/shared/bundles',
         "@components": 'src/shared/components',
         "@api": 'src/lib/api',
-        "@shared": 'src/shared',
-	"@store": 'src/lib/store'
+        "@shared": 'src/lib/shared',
+	"@store": 'src/lib/store',
+	"@server": 'src/lib/server',
+	"@client": 'src/lib/client',
     }
   },
   preprocess: vitePreprocess(),

@@ -148,10 +148,26 @@
 			{ name: "created_by", type: "reference", table: "user" }, // entity?
 			{ name: "updated_by", type: "reference", table: "user" }, // entity?
 		]
+	},
+	visit: {
+		columns: [
+			{ name: "uuid", type: "text", maxlength: 40, unique: true, index: true },
+			{ name: "id", type: "integer", unique: true, index: true, autoincrement: true },
+			{ name: "subject", type: "string", maxlength: 40, index: true },
+			{ name: "subjectTablename", type: "string", maxlength: 40, index: true },
+			{ name: "user", type: "reference",  table: "user" },
+			{ name: "created_at", type: "integer" },
+			{ name: "updated_at", type: "integer" },
+			{ name: "created_by", type: "reference", table: "user" }, // entity?
+			{ name: "updated_by", type: "reference", table: "user" }, // entity?
+		]
+	}
 
 }}
 
 // prd, dependency graph, artifacts, channels, hashtags for skillsets, etc. defauls, artifact kinds: "webbsite" db, etc. Production/Skunkwork/Organization/enterprise/Performance (other meetings)/Collaboration, mission/goals, agent pool, activated vs on the bench, status, task < goal < mission, team & team dynamics - they want to work for YOU
 	// agent.allowance	reference
 	// agent.model reference	
+	// not null
+	// defaults
 

@@ -1,6 +1,6 @@
 
-import schema.js
-import { nanoid } from 'nanoid'
+import { Schema } from "./Schema.js";
+import { nanoid } from 'nanoid';
 
 //    const { data, error } = await supabase.from('instruments').update({ name: 'piano' }).eq('id', 1).select()
 //    const { error } = await supabase.from('instruments').update({ name: 'piano' }).eq('id', 1)
@@ -9,14 +9,11 @@ import { nanoid } from 'nanoid'
 // https://github.com/PostgREST/postgrest?tab=readme-ov-file
 // https://pihhbrhdrwfpbnmsmlix.supabase.co
 
-import { createClient } from '@supabase/supabase-js';
-import { createMockDatabaseClient } from '@store/Mock';
-import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, PUBLIC_MOCK } from '$env/static/public';
-
-export const supabase = PUBLIC_MOCK ? createMockDatabaseClient() : createClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY)
-
-class ORMdb {
-	constructor() {
+export class Database {
+	supabase = null;
+	constructor(imp) {
+		this.supabase = imp;
+	}
 		
 	create(data) {
 		const tableName = data.tableName;
@@ -31,7 +28,7 @@ class ORMdb {
 			}
 		}
 		return this._insert(tableName, payload);
-	},
+	}
 		
 	update(data) {
 		const tableName = data.tableName;
@@ -45,7 +42,7 @@ class ORMdb {
 			}
 		}
 		return this._update(tableName, payload);
-	},
+	}
 
 	/**
 		@param filters: [filter, field, value]
@@ -83,7 +80,7 @@ class ORMdb {
 		@return Promise
 	**/
 	read(tableName, select, filters, limit) {
-		const query = supabase.from(tableName).select(select);
+		const query = this.supabase.from(tableName).select(select);
 		for (let i = 0; i < filters && filters.length; ++i) {
 			let f = filters[i];
 			if (Array.isArray(f)) {
@@ -95,14 +92,14 @@ class ORMdb {
 			query = query[limit];
 		}
 		return query();
-	},
+	}
 
 	/**
 		Caller calls the select, filters, and limits as needed
 		@return Promise
 	*/
 	query(tableName) {
-		return supabase.from(tableName);
+		return this.supabase.from(tableName);
 	}
 		
 /*
@@ -120,34 +117,35 @@ const { data, error } = await supabase
 			
 	*/
 
-	_insert(tableName, payload) {
-		const { data, error } = await supabase.from(tableName).insert(payload).select();
+	async _insert(tableName, payload) {
+		const { data, error } = await this.supabase.from(tableName).insert(payload).select();
 		return { data, error };
-	},
-
-	_update(tableName, payload) {
-		const { data, error } = await supabase.from(tableName).update(payload).eq('id', payload.id).select();
-		return { data, error };
-	},
-	_upsert(tableName, payload) {
-		const { data, error } = await supabase.from(tableName).upsert(payload).select();
-		return { data, error };
-	},
-	_upsertBatch(tableName, payloadArray) {
-		const { data, error } = await supabase.from(tableName).upsert(payloadArray);
-		return { data, error };
-	},
-	_delete(tableName, payload) {
-		const { data, error } = await supabase.from(tableName)["delete"].eq('id', payload.id).select();
-		return { data, error };
-	},
-	subscribe(tableName, listener) {
-		const userListener = supabase.channel('public:user').on('postgres_changes', { event: '*', schema: 'public', table: tableName }, (payload) => listener(payload));
-		return userListener
-	},
-	unsubscribe(userListener) {
-		supabase.removeChannel(userListener);
 	}
+
+	async _update(tableName, payload) {
+		const { data, error } = await this.supabase.from(tableName).update(payload).eq('id', payload.id).select();
+		return { data, error };
+	}
+	async _upsert(tableName, payload) {
+		const { data, error } = await this.supabase.from(tableName).upsert(payload).select();
+		return { data, error };
+	}
+	async _upsertBatch(tableName, payloadArray) {
+		const { data, error } = await this.supabase.from(tableName).upsert(payloadArray);
+		return { data, error };
+	}
+	async _delete(tableName, payload) {
+		const { data, error } = await this.supabase.from(tableName)["delete"].eq('id', payload.id).select();
+		return { data, error };
+	}
+	subscribe(tableName, listener) {
+		const userListener = this.supabase.channel('public:user').on('postgres_changes', { event: '*', schema: 'public', table: tableName }, (payload) => listener(payload));
+		return userListener
+	}
+	unsubscribe(userListener) {
+		this.supabase.removeChannel(userListener);
+	}
+}
 
 
 				
