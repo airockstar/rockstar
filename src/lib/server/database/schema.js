@@ -5,6 +5,7 @@
 			{ name: "uuid", type: "text", maxlength: 40, unique: true, index: true },
 			{ name: "id", type: "integer", unique: true, index: true, autoincrement: true },
 			{ name: "name", type: "text", maxlength: 80, unique: true, index: true },
+			{ name: "status", type: "string", maxlength: 40, enum: ["idle", "alert", "working", "question"] },
 			{ name: "personality", type: "reference", table: "personality" },
 			{ name: "skill", type: "reference", table: "skill" },
 			{ name: "goal", type: "reference", table: "goal" },
@@ -119,23 +120,38 @@
 			{ name: "updated_at", type: "integer" },
 		]
 	},
-	tagteam/collaboration: {
+	collaboration: {
 		columns: [
 			{ name: "uuid", type: "text", maxlength: 40, unique: true, index: true },
 			{ name: "id", type: "integer", unique: true, index: true, autoincrement: true },
 			{ name: "name", type: "string", maxlength: 80, unique: true, index: true },
-			{ name: "contextA", type: "text",  maxlength: 100000 },
-			{ name: "contextB", type: "text",  maxlength: 100000 },
-			{ name: "contextC", type: "text",  maxlength: 100000 },
+			{ name: "agentA", type: "reference",  table: "agent" },
+			{ name: "agentB", type: "reference",  table: "agent" },
+			{ name: "agentC", type: "reference",  table: "agent" },
+			{ name: "pattern", type: "reference", table: "collaboration_pattern" },
 			{ name: "created_at", type: "integer" },
 			{ name: "updated_at", type: "integer" },
 			{ name: "created_by", type: "reference", table: "user" }, // entity?
 			{ name: "updated_by", type: "reference", table: "user" }, // entity?
 		]
-	}
+	},
+	collaboration_pattern: {
+		columns: [
+			{ name: "uuid", type: "text", maxlength: 40, unique: true, index: true },
+			{ name: "id", type: "integer", unique: true, index: true, autoincrement: true },
+			{ name: "name", type: "string", maxlength: 80, unique: true, index: true },
+			{ name: "agentAContext", type: "text",  maxlength: 100000 },
+			{ name: "agentBContext", type: "text",  maxlength: 100000 },
+			{ name: "agentCContext", type: "text",  maxlength: 100000 },
+			{ name: "created_at", type: "integer" },
+			{ name: "updated_at", type: "integer" },
+			{ name: "created_by", type: "reference", table: "user" }, // entity?
+			{ name: "updated_by", type: "reference", table: "user" }, // entity?
+		]
 
 }}
 
 // prd, dependency graph, artifacts, channels, hashtags for skillsets, etc. defauls, artifact kinds: "webbsite" db, etc. Production/Skunkwork/Organization/enterprise/Performance (other meetings)/Collaboration, mission/goals, agent pool, activated vs on the bench, status, task < goal < mission, team & team dynamics - they want to work for YOU
-		
+	// agent.allowance	reference
+	// agent.model reference	
 

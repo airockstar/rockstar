@@ -70,3 +70,16 @@ create policy "Avatar images are publicly accessible." on storage.objects
 
 create policy "Anyone can upload an avatar." on storage.objects
   for insert with check (bucket_id = 'avatars');
+
+
+-- allow upsert to both insert and update
+-- https://github.com/supabase/postgrest-js/issues/173#issuecomment-825124550
+-- https://github.com/PostgREST/postgrest/issues/1118
+CREATE OR REPLACE FUNCTION items_null_id_is_default() RETURNS TRIGGER AS $$
+BEGIN
+  NEW.id = coalesce(NEW.id, nextval('items_id_seq'));
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+CREATE TRIGGER items_null_id_is_default 
+BEFORE INSERT ON items FOR EACH ROW EXECUTE PROCEDURE items_null_id_is_default();
