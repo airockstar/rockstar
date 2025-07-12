@@ -1,11 +1,9 @@
-import { PRIVATE_STRIPE_API_KEY } from "$env/static/private"
 import { error, redirect } from "@sveltejs/kit"
 import type { PageServerLoad } from "./$types"
-import { getBundle } from "@bundles/Enterprise"
-import { supabase } from "$lib/supabaseClient"
-import * as db from "@store/Store"
- import { getLogger } from "@utils/logger";
-  const log = getLogger(import.meta.url);
+import { Enterprise } from "@bundles/Enterprise"
+import { getLogger } from "@utils/logger";
+import { getAuth } from "@utils/Services";
+const log = getLogger(import.meta.url);
 
 export const load: PageServerLoad = async ({
   params,
@@ -15,9 +13,9 @@ export const load: PageServerLoad = async ({
 console.log("ENTER [slug] page.server.ts");
 	log.enter("PageServerLoad");
   const { session } = await safeGetSession()
-	let user = supabase.auth.getUser();
+	let user = getAuth().getUser();
 	//const profile = db.getProfile(user);
-	const d = await getBundle(user, { profile: { eq: { user_id: user.id } }, channel: {}, agent: {}, artifact: {}, visited: { eq: { user_id: user.id } } });
+	const d = await new Enterprise().getBundle(user, { profile: { eq: { user_id: user.id } }, channel: {}, agent: {}, artifact: {}, visited: { eq: { user_id: user.id } } });
 	log.info("loaddddddddddddd", "d=" + JSON.stringify(d));
 	const data = { channels: d.channel, agents: d.agent, artifacts: d.artifact, profile: d.profile, visiteds: d.visited };
 	log.info("loadddddddddddddddd", "channels=" + JSON.stringify(data.channels));

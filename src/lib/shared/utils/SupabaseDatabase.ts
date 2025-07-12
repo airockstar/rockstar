@@ -9,7 +9,7 @@ import { nanoid } from 'nanoid';
 // https://github.com/PostgREST/postgrest?tab=readme-ov-file
 // https://pihhbrhdrwfpbnmsmlix.supabase.co
 
-export class Database {
+export class SupabaseDatabase {
 	supabase = null;
 	constructor(imp) {
 		this.supabase = imp;

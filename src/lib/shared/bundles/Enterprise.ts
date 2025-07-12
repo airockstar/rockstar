@@ -1,7 +1,7 @@
 
 import type { User, Status } from "$lib/types";
 import { getLogger } from "@utils/logger"
-import { getDatabase } from "@utils/DB"
+import { getDatabase } from "@utils/Services"
 const log = getLogger(import.meta.url);
 const db = getDatabase();
 

@@ -13,30 +13,31 @@ const supabase = createClient(supabase_url, anon_key, {
 import { createClient } from '@supabase/supabase-js'
 const supabase = createClient(supabase_url, anon_key)
 */
-const AUTHAPI = {
-	signinWithEmailAndPassword: (email, password) => {
+export function SupabaseAuth(supabase) {
+
+	this.signinWithEmailAndPassword = async (email, password) => {
 		const { data: { user }, error, } = await supabase.auth.signInWithPassword({ email, password });
-	},
-	signinWithMagicLink: (email) => {
+	}
+	this.signinWithMagicLink = async (email) => {
 		const { error } = await supabase .auth .signInWithOtp({ email });
-	},
-	signinWithOAuth: (provider) => {
+	}
+	this.signinWithOAuth = async (provider) => {
 		const { error } = await supabase.auth.signInWithOAuth({ provider });
-	},
-	signinWithPhoneOTP: (provider) => {
+	}
+	this.signinWithPhoneOTP = async (provider) => {
 		const { data, error } = await supabase.auth.signInWithOtp({ phone });
-	},
-	verifySigninWithPhoneOTP: (phone, token) => {
+	}
+	this.verifySigninWithPhoneOTP = async (phone, token) => {
 		// After receiving a SMS with a OTP.
 		const { data, error } = await supabase.auth.verifyOtp({ phone, token });
-	},
-	resetPasswordForEmail: (email) => {
+	}
+	this.resetPasswordForEmail = async (email) => {
 		const { data, error } = await supabase.auth.resetPasswordForEmail(email);
 	}
-	getLoggedInUserSession: () => {
+	this.getSession = async () => {
 		const { data: { session }, } = await supabase.auth.getSession();
-	},
-	getLoggedInUser: () => {
+	}
+	this.getUser = async () => {
 		const { data: { user }, } = await supabase.auth.getUser();
-	},
+	}
 }

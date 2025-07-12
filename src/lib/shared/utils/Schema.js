@@ -1,5 +1,5 @@
 
-{ schema: {
+export const Schema = { schema: {
 	agent: {
 		columns: [
 			{ name: "uuid", type: "text", maxlength: 40, unique: true, index: true },
@@ -170,4 +170,10 @@
 	// agent.model reference	
 	// not null
 	// defaults
+	// agent is active for a particular enterprise
+	// agent have customizatons by owner
+	// agent "bob" is has an owner and is assigned to an enterprise where is has a unique goal and context
+	// user-supplied customizations in overrides/personalizations/customizations, 
+	// learning in learnings derrived from history and oberservations and other agents, 
+	// goals in this enterprise + history
 

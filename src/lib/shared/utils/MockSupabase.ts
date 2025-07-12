@@ -2,9 +2,6 @@
 import { getLogger } from "@utils/logger"
 const log = getLogger(import.meta.url);
 
-export function createMockDatabaseClient() {
-	return new RMockClient();
-}
 
 const db = {
 	channel: [
@@ -29,7 +26,7 @@ const db = {
 	]
 };
 
-function RMockClient() {
+export function MockSupabase() {
 	let data = [];
 	let error = null;
 	this.from = (tableName) => {
@@ -84,5 +81,10 @@ function RMockClient() {
 		ret.single = this.single;
 		log.exit("returning", JSON.stringify(ret));
 		return ret;
+	}
+	this.auth = {
+		getUser: () => {
+			return { data: { user: db.user[0] } };
+		}
 	}
 }

@@ -42,7 +42,7 @@
       on:input={handleInput}
       on:keydown={handleKeydown}
       rows="1"
-    />
+    ></textarea>
   </div>
   <button
     on:click={onSend}
